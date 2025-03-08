@@ -1,0 +1,70 @@
+﻿@model List<SpaceSoftSolutions.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<link rel="stylesheet" href="~/css//EmployeesHR.css" asp-append-version="true" />
+
+<div style="max-width: 90%; margin: 50px auto; padding: 30px; background: #f7f9fc; border-radius: 0px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);">
+    <h1 style=" font-size: 32px; color: black; font-weight: bold;">All Employees</h1>
+
+    <!-- Download PDF Button - placed at the top -->
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+        <a href="@Url.Action("ExportToPDF", "HR", new { reportType = "employees" })" class="download-btn" style="padding: 10px 20px; background: #3a4fb1; color: white;  text-decoration: none; font-weight: bold; transition: 0.3s; cursor: pointer; border: none;">
+            Download PDF
+        </a>
+    </div>
+
+    <!-- Search bar and filter -->
+    <form method="get" action="/HR/Employees" style="margin: 20px 0;">
+        <div style="display: flex; justify-content: center;">
+            <input type="text" name="search" value="@ViewData["SearchQuery"]" class="search-box" placeholder="Search Employees..." style="padding: 10px;  border: 1px solid #7A73D1; width: 250px;" />
+            <select name="departmentId" class="department-filter" style="padding: 10px; border: 1px solid #7A73D1; margin-left: 10px;">
+                <option value="">All Departments</option>
+                @foreach (var department in ViewBag.Departments)
+                {
+                    <option value="@department.Id">@department.Name</option>
+                }
+            </select>
+            <button type="submit" class="btn-custom" style="background-color: #3a4fb1; color: white; padding: 10px 20px; margin-left: 10px;  border: none;">Search</button>
+        </div>
+    </form>
+
+    <!-- Table Container -->
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; margin-top: 30px;">
+            <thead>
+                <tr style="background-color: #3a4fb1; color: white; text-align: center; font-weight: bold;">
+                    <th style="padding: 15px;">Name</th>
+                    <th style="padding: 15px;">Position</th>
+                    <th style="padding: 15px;">Department</th>
+                    <th style="padding: 15px;">Manager</th>
+                    <th style="padding: 15px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employee in Model)
+                {
+                    <tr style="background-color: #fff; border-bottom: 2px solid #f0f0f0; text-align: center;">
+                        <td style="padding: 15px; color: #3a4fb1; font-weight: bold;">@employee.Name</td>
+                        <td style="padding: 15px; color: #7A73D1;">@employee.Position</td>
+                        <td style="padding: 15px; color: #7A73D1;">@employee.Department?.Name </td>
+                        <td style="padding: 15px; color: #7A73D1;">@(employee.Manager?.Name ?? "Not Assigned")</td>
+                        <td style="padding: 15px;">
+                            <form method="get" action="/HR/Details" style="display: inline;">
+                                <input type="hidden" name="employeeId" value="@employee.Id" />
+                                <button class="btn-custom" style="background-color: #3a4fb1; color: white; padding: 8px 16px; text-decoration: none; border-radius: 8px; transition: background-color 0.3s;">View Details</button>
+                            </form>
+                            <form method="post" action="/HR/DeleteEmployee" style="display: inline; margin-left: 10px;">
+                                <input type="hidden" name="employeeId" value="@employee.Id" />
+                                @* <button class="btn-custom" style="background-color: #f44336; color: white; padding: 8px 16px; text-decoration: none; border-radius: 8px; transition: background-color 0.3s;">Delete</button> *@
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

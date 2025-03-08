@@ -1,0 +1,114 @@
+﻿@model SpaceSoftSolutions.Models.Employee
+
+@{
+    ViewData["Title"] = "Create Employee";
+    Layout = "DashboardManagers";
+}
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="card mb-4 shadow-lg">
+                    <div class="card-header pb-0 text-white text-center" style="background-color: #3a4fb1; border-radius: 12px 12px 0 0;">
+                        <h6>Create New Employee</h6>
+                    </div>
+                    <div class="card-body px-4">
+                        <form asp-action="CreateEmp">
+                            <input type="hidden" asp-for="ManagerId" value="@ViewBag.ManagerId" />
+
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                            <div class="mb-3">
+                                <label asp-for="Name" class="form-label fw-bold">Full Name</label>
+                                <input asp-for="Name" class="form-control" required />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label fw-bold">Email</label>
+                                <input asp-for="Email" type="email" class="form-control" required />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="PasswordHash" class="form-label fw-bold">Password</label>
+                                <input asp-for="PasswordHash" type="password" class="form-control" required />
+                                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Address" class="form-label fw-bold">Address</label>
+                                <input asp-for="Address" class="form-control" required />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Position" class="form-label fw-bold">Position</label>
+                                <input asp-for="Position" class="form-control" required />
+                                <span asp-validation-for="Position" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="DepartmentId" class="form-label fw-bold">Department</label>
+                                <select asp-for="DepartmentId" class="form-select" asp-items="ViewBag.Department" required>
+                                    <option value="">Select Department</option>
+                                </select>
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                <a asp-action="Index" class="btn btn-secondary">Back</a>
+                                <button type="submit" class="btn btn-primary">Add Employee</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    /* ✅ تحسين التصميم */
+    .form-control, .form-select {
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .btn-primary {
+        background-color: #3a4fb1 !important;
+        border: none;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+        .btn-primary:hover {
+            background-color: #2c3d91 !important;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d !important;
+        border: none;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .card {
+        border-radius: 12px;
+    }
+
+    .alert-danger {
+        font-size: 14px;
+        padding: 8px;
+        border-radius: 8px;
+    }
+</style>

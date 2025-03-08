@@ -1,0 +1,75 @@
+﻿@model SpaceSoftSolutions.Models.HourlyLeave
+
+@{
+    Layout = "EmployeeDashboard";
+}
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <!-- تم تصغير عرض النموذج ليكون أكثر تناسقًا -->
+                <div class="card mb-4 shadow-lg" style="border-radius: 12px; background-color: #f8f9fa;">
+                    <div class="card-header pb-0 text-center" style="background-color: #2e3c82; color: white; border-radius: 12px 12px 0 0;">
+                        <h3 style="color: white !important; margin:auto; margin-bottom:5px; ">Employee Table</h3>
+                    </div>
+
+
+                    <div class="card-body px-4 pt-4 pb-3">
+                        <form asp-action="RequestLeave" method="post">
+                            <input type="hidden" asp-for="EmployeeId" value="@ViewBag.empId" />
+
+                            <div class="mb-3">
+                                <label class="form-label"><i class="fas fa-clock"></i> Start Time</label>
+                                <input type="time" asp-for="StartTime" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"><i class="fas fa-clock"></i> End Time</label>
+                                <input type="time" asp-for="EndTime" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"><i class="fas fa-comment-alt"></i> Reason</label>
+                                <input asp-for="Reason" class="form-control" placeholder="Enter reason for leave" required />
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary w-100"><i class="fas fa-paper-plane"></i> Submit Request</button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <a href="@Url.Action("Index", "Rleave")" class="btn btn-outline-secondary"><i class="fas fa-home"></i> Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .form-control {
+        border-radius: 8px;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #0056b3;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .btn-primary:hover {
+            background-color: #004494;
+        }
+
+    .btn-outline-secondary {
+        border-radius: 8px;
+    }
+</style>

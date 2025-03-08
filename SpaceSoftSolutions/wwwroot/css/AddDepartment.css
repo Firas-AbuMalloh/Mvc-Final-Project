@@ -1,0 +1,65 @@
+﻿body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F4F4F5;
+    color: #fff;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #3a4fb1;
+    font-weight: 700;
+}
+
+.animated-card {
+    animation: fadeInUp 0.8s ease-in-out;
+}
+
+.form-control {
+    border-radius: 15px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-size: 16px;
+}
+
+    .form-control:focus {
+        border-color: #3a4fb1;
+        box-shadow: 0 0 10px rgba(58, 79, 177, 0.5);
+    }
+
+.btn-custom {
+    background: linear-gradient(135deg, #3a4fb1, #5a62c9);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-custom:hover {
+        background: linear-gradient(135deg, #2e3d91, #505ab4);
+        transform: translateY(-3px);
+    }
+
+.btn-outline-secondary {
+    color: #7A73D1;
+    border: 2px solid #7A73D1;
+    border-radius: 10px;
+}
+
+    .btn-outline-secondary:hover {
+        background-color: #7A73D1;
+        color: white;
+    }

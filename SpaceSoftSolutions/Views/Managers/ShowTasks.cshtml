@@ -1,0 +1,131 @@
+﻿@model IEnumerable<SpaceSoftSolutions.Models.Task>
+
+@{
+    ViewData["Title"] = "Employee Tasks";
+    Layout = "DashboardManagers";
+}
+
+<div class="container py-4">
+    <h2 class="text-center mb-4" style="color: #3a4fb1;">Employee Tasks</h2>
+
+    <div class="mb-3 d-flex justify-content-center">
+        <input type="text" id="taskSearch" class="form-control w-50 me-2" placeholder="Search tasks..." />
+        <button onclick="startVoiceSearch()" class="btn btn-primary"><i class="fas fa-microphone"></i></button>
+    </div>
+
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover text-center" id="taskTable">
+                    <thead style="background-color: #3a4fb1; color: white;">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.TaskName)</th>
+                            <th>@Html.DisplayNameFor(model => model.Description)</th>
+                            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.Status)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taskBody" style="background-color: #f8f9fa;">
+                        @foreach (var task in Model)
+                        {
+                            <tr class="hover-effect">
+                                <td>@Html.DisplayFor(modelItem => task.TaskName)</td>
+                                <td>@Html.DisplayFor(modelItem => task.Description)</td>
+                                <td>@task.StartDate.ToString("yyyy-MM-dd")</td>
+                                <td>@task.EndDate.ToString("yyyy-MM-dd")</td>
+                                <td>
+                                    <span class="badge bg-primary">@Html.DisplayFor(modelItem => task.Status)</span>
+                                </td>
+                                <td>
+                                    <a asp-action="DeleteTask1" asp-route-id="@task.Id" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function startVoiceSearch() {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert("Your browser does not support speech recognition.");
+            return;
+        }
+
+        let recognition = new webkitSpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            let searchQuery = event.results[0][0].transcript;
+            document.getElementById("taskSearch").value = searchQuery;
+            filterTasks(searchQuery);
+        };
+    }
+
+    function filterTasks(query) {
+        let rows = document.querySelectorAll("#taskTable tbody tr");
+        rows.forEach(row => {
+            let taskName = row.cells[0].innerText.toLowerCase();
+            row.style.display = taskName.includes(query.toLowerCase()) ? "" : "none";
+        });
+    }
+
+    document.getElementById("taskSearch").addEventListener("input", function() {
+        filterTasks(this.value);
+    });
+
+    document.getElementById("taskSearch").addEventListener("input", function() {
+        if (this.value.trim() === "") {
+            document.querySelectorAll("#taskTable tbody tr").forEach(row => row.style.display = "");
+        } else {
+            filterTasks(this.value);
+        }
+    });
+</script>
+
+<style>
+    .form-control {
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #dbe3ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary {
+        background-color: #3a4fb1 !important;
+        border: none;
+        border-radius: 50%;
+        padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .btn-primary:hover {
+            background-color: #2c3d91 !important;
+        }
+
+    .badge {
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+
+    .btn-danger {
+        border-radius: 8px;
+    }
+</style>

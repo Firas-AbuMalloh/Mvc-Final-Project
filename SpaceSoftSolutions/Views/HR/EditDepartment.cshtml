@@ -1,0 +1,43 @@
+﻿@model SpaceSoftSolutions.Models.Department
+
+@{
+    ViewData["Title"] = "Edit Department";
+}
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold text-dark">Edit Department</h1>
+        <a href="@Url.Action("Departments", "HR")" class="btn btn-outline-primary">Back to List</a>
+    </div>
+
+    <div class="card shadow-lg border-0 p-4 animated-card">
+        <form asp-action="EditDepartment" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+
+            <div class="mb-3">
+                <label for="Name" class="form-label fw-semibold">Department Name</label>
+                <input type="text" class="form-control shadow-sm" id="Name" name="Name" value="@Model.Name" required placeholder="Enter department name" />
+            </div>
+            <div class="mb-3">
+                <label for="Description" class="form-label fw-semibold">Department Description</label>
+                <textarea class="form-control shadow-sm" id="Description" name="Description" rows="3" required placeholder="Enter department description">@Model.Description</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="ManagerId" class="form-label fw-semibold">Manager</label>
+                <select name="managerId" class="form-control shadow-sm" id="ManagerId" required>
+                    <option value="">-- Select Manager --</option>
+                    @foreach (var manager in ViewBag.Managers)
+                    {
+                        <option value="@manager.Id" selected="@(Model.Managers.FirstOrDefault()?.Id == manager.Id)">
+                            @manager.Name
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-custom px-4 py-2">Save Changes</button>
+                <a href="@Url.Action("Departments", "HR")" class="btn btn-outline-primary px-4 py-2">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

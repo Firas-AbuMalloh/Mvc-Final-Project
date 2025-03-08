@@ -1,0 +1,89 @@
+﻿@model SpaceSoftSolutions.Models.Task
+
+@{
+    Layout = "DashboardManagers";
+}
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card mb-4 shadow-lg">
+                    <div class="card-header pb-0 text-white text-center" style="background-color: #3a4fb1; border-radius: 12px 12px 0 0;">
+                        <h6>Edit Task</h6>
+                    </div>
+                    <div class="card-body px-4">
+                        <form asp-action="EditTask" asp-controller="Managers" method="post">
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="mb-3">
+                                <label for="TaskName" class="form-label fw-bold">Task Name</label>
+                                <input type="text" class="form-control" id="TaskName" asp-for="TaskName" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Description" class="form-label fw-bold">Description</label>
+                                <textarea class="form-control" id="Description" asp-for="Description" rows="3" required></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="StartDate" class="form-label fw-bold">Start Date</label>
+                                    <input type="date" class="form-control" id="StartDate" asp-for="StartDate" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="EndDate" class="form-label fw-bold">End Date</label>
+                                    <input type="date" class="form-control" id="EndDate" asp-for="EndDate" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="EmployeeId" class="form-label fw-bold">Assign to Employee</label>
+                                <select class="form-select" asp-for="EmployeeId" asp-items="ViewBag.Employees" required>
+                                    <option value="">Select an Employee</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a href="/Managers/Tasks" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Update Task</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .form-control, .form-select {
+        border-radius: 8px;
+        padding: 8px;
+    }
+
+    .btn-primary {
+        background-color: #3a4fb1 !important;
+        border: none;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+        .btn-primary:hover {
+            background-color: #2c3d91 !important;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d !important;
+        border: none;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .card {
+        border-radius: 12px;
+    }
+</style>

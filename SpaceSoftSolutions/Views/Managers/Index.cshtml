@@ -1,0 +1,171 @@
+﻿@model List<SpaceSoftSolutions.Models.Employee>
+
+@{
+    Layout = "DashboardManagers";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container-fluid py-4">
+    <!-- زر إضافة موظف -->
+    <button class="btn btn-custom-primary mb-3" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+        <i class="fas fa-user-plus"></i> Add Employee
+    </button>
+
+    <!-- Modal لإضافة الموظف -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEmployeeModalLabel">Add New Employee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Managers/AddEmployee">
+                        <div class="mb-3">
+                            <label for="employeeName" class="form-label">Employee Name</label>
+                            <input type="text" class="form-control" id="employeeName" name="Name" placeholder="Enter employee name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeEmail" class="form-label">Employee Email</label>
+                            <input type="email" class="form-control" id="employeeEmail" name="Email" placeholder="Enter employee email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeePassword" class="form-label">Employee Password</label>
+                            <input type="password" class="form-control" id="employeePassword" name="Password" placeholder="Enter employee password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeePosition" class="form-label">Position</label>
+                            <input type="text" class="form-control" id="employeePosition" name="Position" placeholder="Enter employee position">
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeDepartment" class="form-label">Department</label>
+                            <select class="form-select" id="employeeDepartment" name="DepartmentId">
+                                <option value="">Select Department</option>
+                                @foreach (var department in ViewBag.Departments as List<Department>)
+                                {
+                                    <option value="@department.Id">@department.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeManager" class="form-label">Manager</label>
+                            <select class="form-select" id="employeeManager" name="ManagerId">
+                                <option value="">Select Manager</option>
+                                @foreach (var manager in ViewBag.Managers as List<Manager>)
+                                {
+                                    <option value="@manager.Id">@manager.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-custom-primary">Save Employee</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- جدول الموظفين -->
+    <div class="card mb-4 shadow-lg">
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center" style="background-color: #3a4fb1; color: white; border-radius: 12px 12px 0 0;">
+            <h3  style="color: white !important; margin:auto; margin-bottom:5px; ">Employee Table</h3>
+        </div>
+        <div class="card-body px-3 pt-0 pb-2">
+            <div class="table-responsive">
+                <table class="table table-hover text-center align-items-center mb-0">
+                    <thead class="text-white" style="background-color: #3a4fb1 !important; font-size: 20px !important;">
+                        <tr>
+                            <th style="color: white !important;">Full Name</th>
+                            <th style="color: white !important;">Email</th>
+                            <th style="color: white !important;">Position</th>
+                            <th style="color: white !important;">Department</th>
+                            <th style="color: white !important;">Manager</th>
+                            <th style="color: white !important;">Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #f8f9fa; font-size: 16px !important;">
+                        @foreach (var employee in Model)
+                        {
+                            <tr class="hover-effect">
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="../assets-Manager/img/team-4.jpg" class="avatar avatar-sm me-2" alt="user">
+                                        <h6 class="mb-0 text-sm">@employee.Name</h6>
+                                    </div>
+                                </td>
+                                <td>@employee.Email</td>
+                                <td>@employee.Position</td>
+                                <td>@employee.Department?.Name</td>
+                                <td>
+                                    @if (employee.Manager != null)
+                                    {
+                                        @employee.Manager.Name
+                                    }
+                                    else
+                                    {
+                                        <span>No Manager</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("TaskDetails","Managers",new{id=employee.Id})" class="btn btn-custom-primary btn-sm" style="width:100px; padding:10px 5px">
+                                        <i class="fas fa-tasks"></i> View Task
+                                    </a>
+                                    <a href="@Url.Action("Attendance","Managers",new{id=employee.Id})" class="btn btn-custom-secondary btn-sm" style="width:100px; padding:10px 5px">
+                                        <i class="fas fa-calendar-check"></i> View Attendance
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ✅ تحسين تصميم الجدول ليكون أكثر وضوحًا */
+    .table td, .table th {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        max-width: 200px;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #dbe3ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* 🎨 تخصيص ألوان الأزرار */
+    .btn-custom-primary {
+        background-color: #3a4fb1 !important;
+        color: white !important;
+        border: none;
+        border-radius: 8px;
+    }
+
+        .btn-custom-primary:hover {
+            background-color: #2c3d91 !important;
+        }
+
+    .btn-custom-secondary {
+        background-color: #6c757d !important;
+        color: white !important;
+        border: none;
+        border-radius: 8px;
+    }
+
+        .btn-custom-secondary:hover {
+            background-color: #545b62 !important;
+        }
+
+    /* تحسين الأزرار */
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+</style>

@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Punch In";
+}
+
+@{
+    Layout = "EmployeeDashboard";
+}
+
+@model Attendance
+
+<div class="container py-4">
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header text-center text-white" style="background-color: #3a4fb1; border-radius: 12px 12px 0 0;">
+            <h2 class="fw-bold mb-0">Employee Attendance Details</h2>
+        </div>
+        <div class="card-body p-4">
+            <table class="table table-bordered text-center">
+                <tbody>
+                    <tr>
+                        <th class="bg-light">ID</th>
+                        <td>@Model.Id</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light">Employee ID</th>
+                        <td>@Model.EmployeeId</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light">Punch In Time</th>
+                        <td class="fw-bold text-success">
+                            @Model.PunchIn.ToString("yyyy-MM-dd HH:mm:ss")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="bg-light">Punch Out Time</th>
+                        <td class="fw-bold text-danger">
+                            @(Model.PunchOut != null ? Model.PunchOut.Value.ToString("yyyy-MM-dd HH:mm:ss") : "Still Active")
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer text-center bg-light">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary shadow">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}
+
+<style>
+    /* تحسين شكل الجدول */
+    .table th, .table td {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    /* تحسين ألوان الأزرار */
+    .btn-primary {
+        background-color: #3a4fb1 !important;
+        border-color: #3a4fb1 !important;
+        font-weight: bold;
+    }
+
+        .btn-primary:hover {
+            background-color: #2c3d91 !important;
+            border-color: #2c3d91 !important;
+        }
+
+    /* تحسين الكارد */
+    .card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    
+
+    
+</style>

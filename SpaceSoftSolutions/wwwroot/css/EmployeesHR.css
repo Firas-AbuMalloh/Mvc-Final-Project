@@ -1,0 +1,41 @@
+﻿table th, table td {
+    border-radius: 0px;
+    font-size: 16px;
+    border: 1px solid #ddd; /* إضافة حدود خفيفة مع المسافة */
+}
+
+table tr:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+}
+
+.btn-custom {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+    .btn-custom:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+
+.search-box, .department-filter {
+    padding: 12px;
+    border-radius: 15px;
+    border: 1px solid #7A73D1;
+    outline: none;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    width: 250px;
+}
+
+    .search-box:focus, .department-filter:focus {
+        border-color: #3a4fb1;
+        box-shadow: 0 0 10px rgba(58, 79, 177, 0.2);
+    }

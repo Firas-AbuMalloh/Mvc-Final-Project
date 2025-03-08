@@ -1,0 +1,60 @@
+﻿body {
+    background: #f8f9fc;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    padding: 20px;
+}
+
+h1, h3 {
+    color: #3a4fb1;
+    font-size: 2rem;
+}
+
+.animated-card {
+    animation: fadeInUp 0.8s ease-in-out;
+}
+
+.table th, .table td {
+    padding: 15px;
+    font-size: 14px;
+}
+
+.table th {
+    background-color: #3a4fb1;
+    color: white;
+    font-weight: bold;
+}
+
+.table-row:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+}
+
+.btn-custom {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #3a4fb1, #5a62c9);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-custom:hover {
+        background: linear-gradient(135deg, #2e3d91, #505ab4);
+    }
+
+.btn-outline-primary {
+    color: #3a4fb1;
+    border: 2px solid #3a4fb1;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-outline-primary:hover {
+        background-color: #3a4fb1;
+        color: white;
+    }
+
+.bg-primary {
+    background-color: #3a4fb1 !important;
+}

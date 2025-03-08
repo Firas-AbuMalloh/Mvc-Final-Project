@@ -1,0 +1,43 @@
+﻿@{
+	Layout = null;
+}
+
+<link rel="stylesheet" href="~/css//Login.css" asp-append-version="true" />
+
+
+<div class="container" onclick="onclick">
+    <div class="top"></div>
+    <div class="bottom"></div>
+    <div class="center">
+        <h2>Please Sign In</h2>
+
+        <form asp-action="CheackLogin" method="post">
+            <div class="alert alert-danger text-center mt-3 fw-bold" role="alert"
+                 style="color: white; background-color: #dc3545; border-color: #b52b3a;">
+                @ViewBag.ErrorLogin
+            </div>
+            <input type="email" name="Email" placeholder="Email" required />
+            <input type="password" name="Password" placeholder="Password" required />
+            <a asp-action="ForgetPassword" asp-controller="ForgetPassword" class="text-primary" style="    text-decoration: none;
+    margin-top: 8px;
+    font-size: 12px;
+    margin-left: 15px;
+}">Forget Password?</a>
+
+            <div class="radioBtn">
+            
+                <input type="radio" id="Employee" name="Role" value="Employee" required />
+                <label for="Employee">Employee</label>
+
+                <input type="radio" id="Manager" name="Role" value="Manager" required />
+                <label for="Manager">Manager</label>
+
+                <input type="radio" id="HR" name="Role" value="HR" required />
+                <label for="HR">HR</label>
+            </div>
+            <input type="submit" />
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@using SpaceSoftSolutions.Models
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Add New Manager</h1>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="Name">Manager Name</label>
+                <input type="text" class="form-control" id="Name" name="Name" required placeholder="Enter manager's name" />
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" id="Email" name="Email" required placeholder="Enter manager's email" />
+            </div>
+            <div class="form-group">
+                <label for="DepartmentId">Department</label>
+                <select class="form-control" id="DepartmentId" name="DepartmentId" required>
+                    @foreach (var department in ViewBag.Departments)
+                    {
+                        <option value="@department.ID">@department.Name</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Add Manager</button>
+        </form>
+    </div>
+</body>
+</html>

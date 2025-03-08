@@ -1,0 +1,83 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+@{
+    ViewData["Title"] = "Profile";
+
+    if (Context.Session.GetString("UserType") == "HR")
+    {
+        Layout = "DashboardLayout";
+    }
+    else if (Context.Session.GetString("UserType") == "Manager")
+    {
+        Layout = "DashboardManagers";
+    }
+    else
+    {
+        Layout = "EmployeeDashboard";
+
+    }
+}
+
+<div style="max-width: 900px; margin: 50px auto; padding: 30px; background: #f7f9fc; border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); font-family: 'Arial', sans-serif;">
+    <h2 style="text-align: center; font-size: 32px; color: #333; font-weight: bold;">Edit Profile</h2>
+
+    <div style="display: flex; flex-wrap: wrap; margin-top: 30px;">
+        <div style="flex: 1; text-align: center; margin-bottom: 20px;">
+            <img src="@(!string.IsNullOrEmpty(Model.ImagePath) ? Model.ImagePath : "/images/default-avatar.png")"
+                 alt="Profile Image" style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);">
+            <h3 style="margin-top: 15px; color: #333;">@Model.Name</h3>
+        </div>
+
+        <div style="flex: 2;">
+            <form method="post" enctype="multipart/form-data">
+                <div style="margin-bottom: 20px;">
+                    <label for="name" style="font-size: 16px; color: #333;">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" value="@Model.Name" required style="padding: 12px; border-radius: 10px; border: 1px solid #ddd;" />
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="font-size: 16px; color: #333;">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" value="@Model.Email" required style="padding: 12px; border-radius: 10px; border: 1px solid #ddd;" />
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="address" style="font-size: 16px; color: #333;">Address</label>
+                    <input type="text" name="address" id="address" class="form-control" value="@Model.Address" style="padding: 12px; border-radius: 10px; border: 1px solid #ddd;" />
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <label for="profileImage" style="font-size: 16px; color: #333;">Profile Image</label>
+                    <input type="file" name="profileImage" id="profileImage" class="form-control-file" />
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; border-radius: 10px; font-size: 18px; background-color: #2575fc; color: white; border: none; cursor: pointer; transition: 0.3s;">
+                    Save Changes
+                </button>
+            </form>
+            <a asp-action="ResetPassword" asp-controller="ForgetPassword">Reset Password</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    button:hover {
+        background-color: #6a11cb;
+        transform: scale(1.05);
+    }
+
+    input[type="text"], input[type="email"] {
+        border-radius: 10px;
+    }
+
+    input[type="file"] {
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .form-control-file {
+        margin-top: 10px;
+    }
+</style>

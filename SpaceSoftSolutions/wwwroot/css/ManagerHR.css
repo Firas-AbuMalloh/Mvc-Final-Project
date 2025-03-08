@@ -1,0 +1,103 @@
+﻿.bg-gradient-primary {
+    background: linear-gradient(45deg, #3a4fb1, #7A73D1);
+    border-radius: 10px;
+}
+
+/* تخصيص البطاقات */
+.manager-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+    .manager-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    /* تأثير أنيق عند التحويم على البطاقة */
+    .manager-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(45deg, #3a4fb1, #7A73D1);
+    }
+
+/* تخصيص الأزرار */
+.btn-primary {
+    background: linear-gradient(135deg, #3a4fb1, #7A73D1);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #2e3d91, #6057b1);
+    }
+
+.btn-warning {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    color: #333;
+}
+
+    .btn-warning:hover {
+        background: linear-gradient(135deg, #e0a800, #c79100);
+        color: white;
+    }
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    color: white;
+}
+
+    .btn-danger:hover {
+        background: linear-gradient(135deg, #b21f2d, #9a1626);
+    }
+
+/* تحسين تصميم الأزرار */
+.btn-edit {
+    background: linear-gradient(135deg, #3a4fb1, #7A73D1) !important;
+    border: none !important;
+    border-radius: 8px;
+    color: white !important;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-edit:hover {
+        background: linear-gradient(135deg, #2c3e91, #6057b1) !important;
+    }
+
+.btn-delete {
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    border: none !important;
+    border-radius: 8px;
+    color: white !important;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-delete:hover {
+        background: linear-gradient(135deg, #b21f2d, #9a1626) !important;
+    }

@@ -1,0 +1,95 @@
+﻿@model List<SpaceSoftSolutions.Models.Attendance>
+
+@{
+    Layout = "DashboardManagers";
+}
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card mb-4 shadow-lg">
+                    <div class="card-header pb-0 d-flex justify-content-between align-items-center" style="background-color: #3a4fb1; color: white; border-radius: 12px 12px 0 0;">
+                        <h3 style="color: white !important; margin:auto; margin-bottom:5px; ">Attendance for Employee: <span class="fw-bold">@Model.FirstOrDefault()?.Employee.Name</span></h3>
+                    </div>
+                    <div class="card-body px-4 pt-2 pb-3">
+                        <div class="table-responsive">
+                            @if (Model != null && Model.Any())
+                            {
+                                <table class="table table-hover text-center align-items-center mb-0">
+                                    <thead style="background-color: #3a4fb1; color: white;font-size: 16px !important;">
+                                        <tr>
+                                            <th style="color: white !important;">Date</th>
+                                            <th style ="color: white !important;">Punch In</th>
+                                            <th style ="color: white !important;">Punch Out</th>
+                                            <th style="color: white !important;">Total Hours</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="background-color: #f8f9fa;">
+                                        @foreach (var attendance in Model)
+                                        {
+                                            <tr class="hover-effect">
+                                                <td>@attendance.PunchIn.ToString("MM/dd/yyyy")</td>
+                                                <td>
+                                                    <span class="badge bg-primary">@attendance.PunchIn.ToString("HH:mm")</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-secondary">@attendance.PunchOut?.ToString("HH:mm")</span>
+                                                </td>
+                                                <td>
+                                                    @if (attendance.PunchOut.HasValue)
+                                                    {
+                                                        var totalHours = (attendance.PunchOut.Value - attendance.PunchIn).TotalHours;
+                                                        <span class="badge bg-success">@totalHours.ToString("0.##") hrs</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-warning">N/A</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning text-center mt-3">No attendance records found for this employee.</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    /* ✅ تحسين تصميم الجدول ليكون أكثر وضوحًا */
+    .table td, .table th {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        max-width: 200px;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #dbe3ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* تحسين الأزرار */
+    .badge {
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+
+    .alert-warning {
+        font-size: 14px;
+        padding: 10px;
+        border-radius: 8px;
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+    }
+</style>

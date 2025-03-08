@@ -1,0 +1,190 @@
+﻿@{
+    Layout = "HomeLayout";
+}
+<main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+
+        <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+            <div class="carousel-item active">
+                <img src="~/assets/img/pexels-fauxels-3184429.jpg" alt="">
+                <div class="carousel-container">
+                    <h2 style="color:white; background-color: #75717152;" >Why Choose Digital Boost?</h2>
+                    <p style=" color: white;background-color: #75717152;">At Digital Boost, we help businesses grow by leveraging the power of digital marketing. Our team of experts crafts customized strategies to increase your brand's visibility, engagement, and conversions.</p>
+                    <a href="about.html" class="btn-get-started">Get Started</a>
+                </div>
+            </div><!-- End Carousel Item -->
+
+            <div class="carousel-item">
+                <img src="~/assets/img/WebDesign.jpg" alt="">
+                <div class="carousel-container">
+                    <h2 style="color:white; background-color: #75717152;">Why Choose Digital Boost?</h2>
+                    <p style=" color: white;background-color: #75717152;">At Digital Boost, we help businesses grow by leveraging the power of digital marketing. Our team of experts crafts customized strategies to increase your brand's visibility, engagement, and conversions.</p>
+                    <a asp-action="About" asp-controller="BaseHome" class="btn-get-started">Get Started</a>
+                </div>
+            </div><!-- End Carousel Item -->
+
+
+
+            <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+            </a>
+
+            <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+            </a>
+
+        </div>
+
+        <div class="featured container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-4 d-flex" data-aos="fade-up" data-aos-delay="100">
+                    <div class="featured-item position-relative">
+                        <div class="icon"><i class="bi bi-graph-up icon"></i></div>
+                        <h4><a href="" class="stretched-link">Social Media Growth</a></h4>
+                        <p>We create data-driven strategies to grow your brand on Facebook, Instagram, LinkedIn, and more.</p>
+                    </div>
+                </div><!-- End Featured Item -->
+
+                <div class="col-lg-4 d-flex" data-aos="fade-up" data-aos-delay="200">
+                    <div class="featured-item position-relative">
+                        <div class="icon"><i class="bi bi-search icon"></i></div>
+                        <h4><a href="" class="stretched-link">SEO Optimization</a></h4>
+                        <p>Boost your search engine rankings and attract organic traffic with expert SEO strategies.</p>
+                    </div>
+                </div><!-- End Featured Item -->
+
+                <div class="col-lg-4 d-flex" data-aos="fade-up" data-aos-delay="300">
+                    <div class="featured-item position-relative">
+                        <div class="icon"><i class="bi bi-megaphone icon"></i></div>
+                        <h4><a href="" class="stretched-link">Paid Advertising</a></h4>
+                        <p>Maximize your ROI with high-converting Google Ads and social media advertising campaigns.</p>
+                    </div>
+                </div><!-- End Featured Item -->
+
+            </div>
+
+
+        </div>
+
+    </section><!-- /Hero Section -->
+    <!-- About Section -->
+    <section id="about" class="section about">
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row gy-4">
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <img src="assets\img\pexels-fauxels-3184632.jpg" class="img-fluid" alt="About Digital Boost">
+                </div>
+                <div class="col-lg-6 order-2 order-lg-1 content">
+                    <h3>About Digital Boost</h3>
+                    <p class="fst-italic">
+                        At Digital Boost, we empower businesses with cutting-edge digital marketing solutions that drive growth, increase visibility, and maximize ROI.
+                    </p>
+                    <ul>
+                        <li><i class="bi bi-check2-all"></i> <span>Expert social media management to enhance brand presence and engagement.</span></li>
+                        <li><i class="bi bi-check2-all"></i> <span>SEO strategies that improve search rankings and generate organic traffic.</span></li>
+                        <li><i class="bi bi-check2-all"></i> <span>High-converting ad campaigns on Google and social media for maximum reach and impact.</span></li>
+                    </ul>
+                    <p>
+                        Our mission is to help businesses navigate the digital landscape with data-driven strategies, ensuring long-term success and sustainable growth.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section><!-- /About Section -->
+    <!-- Services Section -->
+    <section id="services" class="services section">
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-activity"></i>
+                        </div>
+                        <a href="#" class="stretched-link">
+                            <h3>Social Media Management</h3>
+                        </a>
+                        <p>Boost your brand’s visibility and engagement on popular platforms like Facebook, Instagram, and Twitter with expert social media strategies.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-broadcast"></i>
+                        </div>
+                        <a href="#" class="stretched-link">
+                            <h3>Search Engine Optimization (SEO)</h3>
+                        </a>
+                        <p>Enhance your website’s organic search ranking with our customized SEO strategies designed to drive traffic and improve visibility.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-easel"></i>
+                        </div>
+                        <a href="#" class="stretched-link">
+                            <h3>Pay-Per-Click Advertising (PPC)</h3>
+                        </a>
+                        <p>Maximize ROI with targeted Google Ads and social media PPC campaigns designed to attract potential customers to your business.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-bounding-box-circles"></i>
+                        </div>
+                        <a href="#" class="stretched-link">
+                            <h3>Content Marketing</h3>
+                        </a>
+                        <p>Create compelling content that resonates with your target audience. From blogs to videos, we help tell your brand’s story effectively.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-calendar4-week"></i>
+                        </div>
+                        <a href="#" class="stretched-link">
+                            <h3>Analytics and Reporting</h3>
+                        </a>
+                        <p>Track the success of your campaigns with comprehensive analytics and reports that offer actionable insights for improvement.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-chat-square-text"></i>
+                        </div>
+                        <a href="#" class="stretched-link">
+                            <h3>Brand Strategy Consultation</h3>
+                        </a>
+                        <p>Develop a tailored brand strategy that aligns with your business goals and helps you stand out in a competitive market.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+            </div>
+
+        </div>
+
+    </section><!-- /Services Section -->
+
+
+
+</main>

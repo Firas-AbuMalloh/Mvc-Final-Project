@@ -1,0 +1,135 @@
+﻿@model List<SpaceSoftSolutions.Models.Evaluation>
+
+@{
+    Layout = "DashboardManagers";
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container-fluid py-4">
+    <!-- جعل العرض كامل للصفحة -->
+    <div class="card mb-4 shadow-lg">
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center" style="background-color: #3a4fb1; color: white; border-radius: 12px 12px 0 0;">
+            <h3 style="color: white !important; margin-top:15px; margin-bottom:5px; ">Evaluations Table</h3>
+            <div>
+                <button onclick="EvaluateEmployee()" class="btn btn-light text-primary btn-sm"><i class="fas fa-edit"></i> Evaluate Employee</button>
+                <button onclick="downloadEvaluationsCSV()" class="btn btn-success btn-sm"><i class="fas fa-file-download"></i> Export Evaluations</button>
+            </div>
+        </div>
+        <div class="card-body px-3 pt-0 pb-2">
+            <div class="table-responsive" style="overflow-x: auto;">
+                <!-- منع السكرول الجانبي إلا عند الحاجة -->
+                <table class="table table-hover text-center align-items-center mb-0" id="evaluationTable">
+                    <thead class="text-white" style="background-color: #3a4fb1 !important; font-size: 16px !important;">
+                        <!-- تصغير الخط -->
+                        <tr>
+                            <th style="color: white !important;" >Full Name</th>
+                            <th style="color: white !important;">Email</th>
+                            <th style="color: white !important;">Position</th>
+                            <th style="color: white !important;">Department</th>
+                            <th style="color: white !important;">Manager</th>
+                            <th style="color: white !important;">Date Evaluated</th>
+                            <th style="color: white !important;">Score</th>
+                            <th style="color: white !important;">Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #f8f9fa; font-size: 11px;">
+                        <!-- تصغير حجم الخط ليكون الجدول أوسع -->
+                        @foreach (var evaluation in Model)
+                        {
+                            <tr class="hover-effect">
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="../assets-Manager/img/team-4.jpg" class="avatar avatar-sm me-2" alt="user">
+                                        <p style="font-size: 14px;">@evaluation.Employee.Name</p>
+                                    </div>
+                                </td>
+                                <td style="font-size: 14px;">@evaluation.Employee.Email</td>
+                                <td style="font-size: 14px;">@evaluation.Employee.Position</td>
+                                <td style="font-size: 14px;">@(evaluation.Employee.Department?.Name ?? "N/A")</td>
+                                <td style="font-size: 14px;">@(evaluation.Employee.Manager?.Name ?? "No Manager")</td>
+                                <td style="font-size: 14px;">@evaluation.DateEvaluated</td>
+                                <td>
+                                    <span class="badge" style="width: 100px; display: inline-block; text-align: center;
+    background-color: @(evaluation.Score == "excellent" ? "green" :
+                      evaluation.Score == "very good" ? "orange" :
+                      evaluation.Score == "good" ? "blue" :
+                      evaluation.Score == "fair" ? "red" : "gray");
+    color: white; padding: 5px; border-radius: 5px;">
+                                        @evaluation.Score
+                                    </span>
+                                </td>
+                                <td style="font-size: 18px;">
+                                    @evaluation.Comments
+                                </td> <!-- ✅ التصحيح هنا، لن يتم قص النص بعد الآن -->
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function EvaluateEmployee() {
+        window.location.href = "/Managers/Evaluation";
+    }
+
+    function downloadEvaluationsCSV() {
+        window.location.href = "/Managers/ExportEvaluationsCSV";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var successMessage = '@TempData["SuccessMessage"]';
+        if (successMessage && successMessage !== '') {
+            Swal.fire({
+                title: 'Success!',
+                text: successMessage,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                fetch('/Managers/ClearSuccessMessage', { method: 'POST' });
+            });
+        }
+    });
+</script>
+
+<style>
+    /* ✅ تصحيح مشكلة اختفاء النص في عمود "Comments" */
+    .table td, .table th {
+        white-space: normal !important; /* السماح بالتفاف النص */
+        word-wrap: break-word !important; /* كسر النص عند الحاجة */
+        max-width: 250px; /* تحديد عرض أقصى للخلايا لمنع تمدد الجدول */
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #dbe3ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+   .color1{
+       color:aliceblue ;
+   }
+
+    /* تحسين الأزرار */
+    .btn-primary {
+        background-color: #3a4fb1 !important;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 12px;
+    }
+
+        .btn-primary:hover {
+            background-color: #2c3d91 !important;
+        }
+
+    .btn-success {
+        border-radius: 8px;
+    }
+
+    .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+</style>

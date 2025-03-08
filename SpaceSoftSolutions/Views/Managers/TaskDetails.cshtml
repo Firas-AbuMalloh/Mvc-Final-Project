@@ -1,0 +1,56 @@
+﻿@model Employee
+
+@{
+    Layout = "~/Views/Shared/DashboardManagers.cshtml";
+}
+
+
+
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card mb-4 shadow-lg">
+                <div class="card-header bg-primary text-white" style="background:#3a4fb1!important;">
+                    <h5 class="text-center" style="color:#eee !important;">Task Details for @Model.Name</h5>
+                </div>
+                <div class="card-body p-4">
+                    @if (Model.Tasks.Any())
+                    {
+                        @foreach (var task in Model.Tasks)
+                        {
+                            <div class="mb-4 p-3 border rounded shadow-sm bg-light">
+                                <div class="d-flex flex-wrap">
+                                    <div class="me-4 mb-2">
+                                        <h5><strong>Task Name:</strong> <span>@task.TaskName</span></h5>
+                                    </div>
+                                    <div class="me-4 mb-2">
+                                        <h6><strong>Description:</strong> <span class="text-muted">@task.Description</span></h6>
+                                    </div>
+                                    <div class="me-4 mb-2">
+                                        <h6><strong>Start Date:</strong> <span class="badge" style="background:#3a4fb1!important;">@task.StartDate.ToString("yyyy-MM-dd")</span></h6>
+                                    </div>
+                                    <div class="me-4 mb-2">
+                                        <h6><strong>End Date:</strong> <span class="badge" style="background:#3a4fb1!important;">@task.EndDate.ToString("yyyy-MM-dd")</span></h6>
+                                    </div>
+                                    <div class="me-4 mb-2">
+                                        <h6><strong>Status:</strong> <span class="badge" style="background:#3a4fb1!important;">@task.Status</span></h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning text-center">No tasks assigned for this employee.</div>
+                    }
+
+                    <div class="text-center mt-3">
+                        <a href="/managers/Index" class="btn btn-secondary">Back to Employees</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

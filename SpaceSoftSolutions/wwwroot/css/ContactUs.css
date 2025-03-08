@@ -1,0 +1,93 @@
+﻿/* خلفية الصفحة */
+.body {
+    background: linear-gradient(135deg, #3a4fb1, #7A73D1);
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    padding: 40px 0;
+    
+}
+
+/* تنسيق الحاوية الرئيسية */
+/*.container.contact {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+}*/
+
+/* تنسيق قسم "Contact Us" */
+.contact-info {
+    text-align: center;
+    padding: 20px;
+}
+
+    .contact-info img {
+        width: 100px;
+        margin-bottom: 15px;
+        filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2));
+    }
+
+    .contact-info h2 {
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .contact-info h4 {
+        opacity: 0.8;
+    }
+
+/* تنسيق النموذج */
+.contact-form {
+    padding: 20px;
+    border-left: 3px solid white;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* تنسيق الحقول */
+.form-control {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    color: white;
+    font-size: 16px;
+    width:75vh;
+}
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.3);
+        outline: none;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.4);
+    }
+
+/* زر الإرسال */
+.btn-login {
+    background: linear-gradient(45deg, #3a4fb1, #7A73D1);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s ease-in-out;
+    width:40vh;
+}
+
+    .btn-login:hover {
+        background: linear-gradient(45deg, #7A73D1, #3a4fb1);
+        transform: scale(1.05);
+    }
+
+/* تحسين التخطيط للهواتف */
+@media (max-width: 768px) {
+    .contact-form {
+        border-left: none;
+        border-top: 3px solid white;
+        margin-top: 20px;
+    }
+}

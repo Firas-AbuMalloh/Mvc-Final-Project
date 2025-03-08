@@ -1,0 +1,29 @@
+﻿@model SpaceSoftSolutions.Models.Department
+
+@{
+    ViewData["Title"] = "Add Department";
+}
+<link rel="stylesheet" href="~/css//AddDepartment.css" asp-append-version="true" />
+
+<div class="container my-5">
+    <h1 class="text-center fw-bold text-dark mb-4">Add New Department</h1>
+
+    <!-- Add and Cancel Buttons - Moved to the top -->
+
+    <div class="card shadow-lg border-0 p-4 animated-card">
+        <form method="post">
+            <div class="mb-4">
+                <label for="Name" class="form-label fw-semibold">Department Name</label>
+                <input type="text" class="form-control shadow-sm" id="Name" name="Name" required placeholder="Enter department name" />
+            </div>
+            <div class="mb-4">
+                <label for="Description" class="form-label fw-semibold">Department Description</label>
+                <textarea class="form-control shadow-sm" id="Description" name="Description" rows="3" required placeholder="Enter department description"></textarea>
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-custom px-5 py-3">Add Department</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿@model SpaceSoftSolutions.Models.Feedback
+@{
+	Layout = "NavBar_Footer";
+
+}
+
+@{
+	ViewData["Title"] = "ContactUs";
+}
+
+<link rel='stylesheet' type='text/css' media='screen' href='~/css/ContactUs.css'>
+<div class="body">
+<!------ Include the above in your HEAD tag ---------->
+<form id="contactForm" method="post" asp-action="HandelContactUs">
+
+	<div class="container contact">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="contact-info">
+					<img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image" />
+					<h2>Contact Us</h2>
+					<h4>We would love to hear from you !</h4>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="contact-form">
+
+					<div class="form-group">
+						<label class="control-label col-md-2">Name</label>
+						<div class="col-md-10">
+							<input type="text" class="form-control" asp-for="Name" required>
+						</div>
+
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-2">Email</label>
+						<div class="col-md-10">
+							<input type="email" class="form-control" asp-for="Email" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-2">Message</label>
+						<div class="col-md-10">
+							<textarea class="form-control" asp-for="Message" required></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<button type="submit" class="btn-login btn btn-primary">Send</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+<script>
+	$("#contactForm").submit(function (e) {
+		e.preventDefault();
+		$.ajax({
+			type: "POST",
+			url: $(this).attr("action"),
+			data: $(this).serialize(),
+			success: function (response) {
+				if (response.success) {
+					Toastify({
+						text: response.message,
+						duration: 3000,
+						close: true,
+						gravity: "top", // أو "bottom"
+						position: "center", // أو "left" أو "right"
+						backgroundColor: "linear-gradient(to right, #4CAF50, #8BC34A)",
+					}).showToast();
+					$("#contactForm")[0].reset();  // تفرغ الفورم بعد الإرسال
+				} else {
+					Toastify({
+						text: response.message,
+						duration: 3000,
+						close: true,
+						gravity: "top",
+						position: "center",
+						backgroundColor: "linear-gradient(to right, #f44336, #e57373)",
+					}).showToast();
+				}
+			},
+			error: function () {
+				Toastify({
+					text: "حدث خطأ غير متوقع!",
+					duration: 3000,
+					close: true,
+					gravity: "top",
+					position: "center",
+					backgroundColor: "linear-gradient(to right, #f44336, #e57373)",
+				}).showToast();
+			}
+		});
+	});
+</script>
+

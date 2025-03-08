@@ -1,0 +1,58 @@
+﻿body {
+    background: linear-gradient(135deg, #3a4fb1, #7A73D1);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #3a4fb1;
+}
+
+.animated-card {
+    animation: fadeInUp 0.8s ease-in-out;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    .form-control:focus {
+        border-color: #3a4fb1;
+        box-shadow: 0 0 8px rgba(58, 79, 177, 0.5);
+    }
+
+.btn-custom {
+    background: linear-gradient(135deg, #3a4fb1, #5a62c9);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-custom:hover {
+        background: linear-gradient(135deg, #2e3d91, #505ab4);
+    }
+
+.btn-outline-primary {
+    color: #3a4fb1;
+    border: 2px solid #3a4fb1;
+    border-radius: 10px;
+}
+
+    .btn-outline-primary:hover {
+        background-color: #3a4fb1;
+        color: white;
+    }

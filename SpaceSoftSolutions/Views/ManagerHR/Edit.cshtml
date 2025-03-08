@@ -1,0 +1,115 @@
+﻿@model SpaceSoftSolutions.Models.Manager
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "DashboardLayout";
+}
+<link rel="stylesheet" href="~/css/EditManager.css" asp-append-version="true" />
+
+<h1 class="text-center my-4" style="color:#3a4fb1;">Edit Manager</h1>
+
+<div class="container">
+    <div class="card shadow-lg border-0 rounded-4 mx-auto" style="max-width: 500px;">
+        <div class="card-header text-white text-center" style="background-color: #3a4fb1;">
+            <h5 class="fw-semibold m-0">Edit Manager Details</h5>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label fw-bold">Name</label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label fw-bold">Email</label>
+                    <input asp-for="Email" class="form-control" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PasswordHash" class="form-label fw-bold">Password</label>
+                    <input asp-for="PasswordHash" class="form-control" type="password" required />
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" required />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" required />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DepartmentId" class="form-label fw-bold">Department</label>
+                    <select asp-for="DepartmentId" class="form-select" required>
+                        <option value="">Select Department</option>
+                        @foreach (var department in ViewBag.Departments)
+                        {
+                            <option value="@department.Id" selected="@(department.Id == Model.DepartmentId ? "selected" : null)">
+                                @department.Name
+                            </option>
+                        }
+                    </select>
+
+
+                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Manager" class="btn btn-secondary">Back</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    /* تحسين تصميم الفورم */
+    .card {
+        border-radius: 12px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        background-color: #3a4fb1 !important;
+        border-color: #3a4fb1 !important;
+    }
+
+    .btn-secondary {
+        background-color: #7A73D1 !important;
+        border-color: #7A73D1 !important;
+    }
+
+    .btn-primary:hover {
+        background-color: #2e3c82 !important;
+        border-color: #2e3c82 !important;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5e5ca8 !important;
+        border-color: #5e5ca8 !important;
+    }
+
+    h1, h5 {
+        font-size: 22px;
+    }
+</style>

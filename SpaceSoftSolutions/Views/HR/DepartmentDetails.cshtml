@@ -1,0 +1,60 @@
+﻿@model SpaceSoftSolutions.Models.Department
+
+@{
+    ViewData["Title"] = "Department Details";
+}
+<link rel="stylesheet" href="~/css//DepartmentDetails.css" asp-append-version="true" />
+
+<div class="my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 px-4">
+        <a href="@Url.Action("Departments", "HR")" class="btn btn-outline-primary">Back to Departments</a>
+    </div>
+
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden animated-card w-100">
+        <div class="card-header bg-primary text-white fw-bold text-center py-3">
+            <h4 class="m-0">Department Information</h4>
+        </div>
+        <div class="card-body text-dark px-5 py-4">
+            <form method="get">
+                <div class="mb-3">
+                    <label class="form-label fs-5">Department<strong>:</strong></label>
+                    <input type="text" class="form-control" value="@Model.Name" disabled />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fs-5"><strong>Description:</strong></label>
+                    <input type="text" class="form-control" value="@Model.Description" disabled />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fs-5"><strong>Manager:</strong></label>
+                    <input type="text" class="form-control" value="@(Model.Managers?.FirstOrDefault()?.Name ?? "Not Assigned")" disabled />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <h3 class="mt-5 fw-bold text-dark">Employees in this Department</h3>
+
+    <!-- Employee Table -->
+    <div class="table-responsive mt-3">
+        <table class="table table-bordered table-striped text-center w-100">
+            <thead>
+                <tr style="background-color: #3a4fb1; color: white; font-weight: bold;">
+                    <th>Employee Name</th>
+                    <th>Position</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employee in Model.Employees)
+                {
+                    <tr>
+                        <td>@employee.Name</td>
+                        <td>@employee.Position</td>
+                        <td>@employee.Email</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

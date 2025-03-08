@@ -1,0 +1,132 @@
+﻿@{
+    Layout = "DashboardManagers";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container-fluid py-4">
+    <div class="card mb-4 shadow-lg">
+        <div class="card mb-4 shadow-lg">
+            <div class="card-header pb-0 d-flex justify-content-between align-items-center" style="background-color: #3a4fb1; color: white; border-radius: 12px 12px 0 0;">
+                <h3 style="color: white !important; margin:auto; margin-bottom:5px; ">Employee Yearly Evaluation</h3>
+            </div>
+        <div class="card-body px-3 pt-0 pb-2">
+            <div class="container mt-4">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: '@TempData["SuccessMessage"]',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    </script>
+                }
+
+                <form id="evaluationForm" action="@Url.Action("SubmitEvaluation", "Managers")" method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="manager" class="form-label">Select Manager:</label>
+                            <select class="form-select" id="manager" name="ManagerId">
+                                <option value="">-- Select Manager --</option>
+                                @foreach (var manager in ViewBag.Managers)
+                                {
+                                    <option value="@manager.Id">@manager.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="employee" class="form-label">Select Employee:</label>
+                            <select class="form-select" id="employee" name="EmployeeId">
+                                <option value="">-- Select Employee --</option>
+                                @foreach (var employee in ViewBag.Employees)
+                                {
+                                    <option value="@employee.Id">@employee.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    @for (int i = 1; i <= 10; i++)
+                    {
+                        <div class="mb-3">
+                            <label for="question@i">@($"{i}. {GetQuestionText(i)}")</label>
+                            <select class="form-select" id="question@i" name="question@i">
+                                <option value="excellent">Excellent</option>
+                                <option value="very_good">Very Good</option>
+                                <option value="good">Good</option>
+                                <option value="fair">Fair</option>
+                            </select>
+                        </div>
+                    }
+
+                    <div class="mb-3">
+                        <label for="comments" class="form-label">Comments:</label>
+                        <textarea class="form-control" id="comments" name="comments" rows="3"></textarea>
+                    </div>
+
+                    <button class="btn btn-custom-primary" type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function EvaluateEmployee() {
+        window.location.href = "/Managers/Evaluation";
+    }
+</script>
+
+<style>
+    /* ✅ تحسين تصميم النموذج والجدول ليكون أكثر وضوحًا */
+    .table-hover tbody tr:hover {
+        background-color: #dbe3ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-custom-primary {
+        background-color: #3a4fb1 !important;
+        color: white !important;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+        .btn-custom-primary:hover {
+            background-color: #2c3d91 !important;
+        }
+
+    .form-select {
+        border-radius: 8px;
+        padding: 6px 10px;
+    }
+</style>
+
+@functions {
+    private string GetQuestionText(int index)
+    {
+        return index switch
+        {
+            1 => "How would you rate the employee's overall performance this year?",
+            2 => "How effective is the employee at communicating with team members?",
+            3 => "Does the employee meet deadlines effectively?",
+            4 => "How well does the employee handle stress and pressure?",
+            5 => "How well does the employee contribute to the team’s goals?",
+            6 => "Does the employee demonstrate leadership qualities?",
+            7 => "How would you rate the employee's problem-solving skills?",
+            8 => "How would you rate the employee’s punctuality?",
+            9 => "Does the employee work well with others?",
+            10 => "How would you rate the employee's overall attitude at work?",
+            _ => ""
+        };
+    }
+}

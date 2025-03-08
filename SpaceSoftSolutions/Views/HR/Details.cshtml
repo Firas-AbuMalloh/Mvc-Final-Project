@@ -1,0 +1,82 @@
+﻿@model SpaceSoftSolutions.Models.Employee
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold text-dark">Employee Details</h1>
+        <a href="@Url.Action("Employees", "HR")" class="btn btn-outline-primary">Back to Employees List</a>
+    </div>
+
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden animated-card">
+        <div class="card-header bg-primary text-white fw-bold text-center py-3">Employee Information</div>
+        <div class="card-body text-dark px-5 py-4 text-center">
+            <img src="@(!string.IsNullOrEmpty(Model.ImagePath) ? Model.ImagePath : "/images/default-avatar.png")" class="rounded-circle mb-3" width="150" height="150" alt="Employee Image">
+            <h3 class="fw-bold">@Model.Name</h3>
+            <p class="fs-5"><strong>Email:</strong> @Model.Email</p>
+            <p class="fs-5"><strong>Position:</strong> @Model.Position</p>
+            <p class="fs-5"><strong>Department:</strong> @Model.Department?.Name </p>
+            <p class="fs-5"><strong>Address:</strong> @Model.Address </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: #f8f9fc;
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 800px;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+    h1 {
+        color: #2c3e50;
+    }
+
+    .animated-card {
+        animation: fadeInUp 0.8s ease-in-out;
+    }
+
+
+
+    .btn-primary {
+        padding: 10px 20px;
+        background: #3a4fb1;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+    }
+
+        .btn-primary:hover {
+            background: #2e3d91;
+        }
+
+    .btn-outline-primary {
+        color: #3a4fb1;
+        border: 2px solid #3a4fb1;
+        border-radius: 10px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #3a4fb1;
+            color: white;
+        }
+
+    .bg-primary {
+        background-color: #3a4fb1 !important;
+    }
+</style>

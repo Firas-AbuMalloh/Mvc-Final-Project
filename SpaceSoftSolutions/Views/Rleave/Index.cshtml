@@ -1,0 +1,83 @@
+﻿@model List<SpaceSoftSolutions.Models.HourlyLeave>
+
+@{
+    Layout = "EmployeeDashboard";
+}
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4 shadow-lg" style="border-radius: 12px; background-color: #f8f9fa;">
+                    <div class="card-header pb-0 d-flex justify-content-between align-items-center" style="background-color: #007bff; color: white; border-radius: 12px 12px 0 0;">
+                        <h6 class="mb-0">Leave Requests</h6>
+                    </div>
+                    <div class="card-body px-3 pt-3 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center table-hover w-100" style="border-radius: 10px; overflow: hidden;">
+                                <thead style="background-color: #0056b3; color: white;">
+                                    <tr>
+                                        <th class="text-uppercase text-light text-xs font-weight-bold p-3">ID</th>
+                                        <th class="text-uppercase text-light text-xs font-weight-bold p-3">Employee</th>
+                                        <th class="text-uppercase text-light text-xs font-weight-bold p-3">Start Time</th>
+                                        <th class="text-uppercase text-light text-xs font-weight-bold p-3">End Time</th>
+                                        <th class="text-uppercase text-light text-xs font-weight-bold p-3">Reason</th>
+                                        <th class="text-uppercase text-light text-xs font-weight-bold p-3">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="background-color: white;">
+                                    @foreach (var req in Model)
+                                    {
+                                        <tr class="hover-effect">
+                                            <td class="p-3"><p class="text-xs text-dark mb-0">@req.Id</p></td>
+                                            <td class="p-3"><p class="text-xs text-dark mb-0">@req.EmployeeId</p></td>
+                                            <td class="p-3"><p class="text-xs text-dark mb-0">@req.StartTime</p></td>
+                                            <td class="p-3"><p class="text-xs text-dark mb-0">@req.EndTime</p></td>
+                                            <td class="p-3"><p class="text-xs text-dark mb-0">@req.Reason</p></td>
+                                            <td class="p-3"><p class="text-xs font-weight-bold text-dark mb-0">@req.Status</p></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary"><i class="fas fa-home"></i> Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .hover-effect:hover {
+        background-color: #e9f5ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        background-color: #0056b3;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .btn-primary:hover {
+            background-color: #004494;
+        }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+</style>

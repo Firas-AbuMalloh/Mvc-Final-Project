@@ -1,0 +1,156 @@
+﻿@using SpaceSoftSolutions.Models
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedbacks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #6c5ce7;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+            .table th, .table td {
+                padding: 15px;
+                text-align: center;
+                border: 1px solid #ddd;
+                font-size: 14px;
+            }
+
+            .table th {
+                background-color: #3a4fb1;
+                color: white;
+                font-weight: bold;
+            }
+
+        .table-row:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-3px);
+        }
+
+        .btn-custom {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #3a4fb1, #5a62c9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-custom:hover {
+                background: linear-gradient(135deg, #2e3d91, #505ab4);
+            }
+
+        .btn-danger {
+            padding: 8px 16px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-danger:hover {
+                background: #d32f2f;
+            }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2e3d91;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 30px;
+            text-align: center;
+            width: 26%;
+        }
+
+            .download-btn:hover {
+                background: #5a4cc7;
+            }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <!-- ✅ زر تحميل الـ PDF في الأعلى -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fw-bold text-dark">Feedbacks</h1>
+            <a href="@Url.Action("ExportToPDF", "HR", new { reportType = "feedbacks" })" class="download-btn">
+                Download Feedbacks PDF
+            </a>
+        </div>
+
+        <!-- ✅ البحث عن التعليقات -->
+        <form method="get" action="/HR/Feedbacks" class="mb-4">
+            <div class="input-group">
+                <input type="text" id="search" name="search" class="form-control shadow-sm" placeholder="Search Feedbacks..." value="@ViewData["SearchQuery"]">
+                <button type="submit" class="btn btn-custom">Search</button>
+            </div>
+        </form>
+
+        <!-- ✅ جدول التعليقات -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="table-header">
+                        <th>Employee Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Submitted At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var feedback in Model)
+                    {
+                        <tr class="table-row">
+                            <td>@feedback.Name</td>
+                            <td>@feedback.Email</td>
+                            <td>@feedback.Message</td>
+                            <td>@feedback.SubmittedAt</td>
+                            @* <td> *@
+                            @*     <form method="post" action="/HR/ViewLeaveDetails" class="d-inline"> *@
+                            @*         <input type="hidden" name="leaveId" value="@feedback.Id" /> *@
+                            @*         <button type="submit" class="btn btn-custom btn-sm">View Details</button> *@
+                            @*     </form> *@
+                            @* </td> *@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+    <!-- زر تحميل الـ PDF -->
+    <a href="@Url.Action("ExportToPDF", "HR", new { reportType = "feedbacks" })" class="btn btn-primary">
+        Download Feedbacks PDF
+    </a>
+    </a>
+</div>

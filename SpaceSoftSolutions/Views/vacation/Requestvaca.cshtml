@@ -1,0 +1,72 @@
+﻿@model SpaceSoftSolutions.Models.LeaveRequest
+@{
+    Layout = "EmployeeDashboard";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-header bg-primary text-white text-center py-3">
+            <h3 style="color: white !important; margin:auto; margin-bottom:5px; ">Request Vacation</h3>
+
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Requestvaca" method="post">
+                <input type="hidden" asp-for="EmployeeId" value="@ViewBag.empId" />
+
+                <div class="mb-3">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" asp-for="StartDate" class="form-control input-shadow" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">End Date</label>
+                    <input type="date" asp-for="EndDate" class="form-control input-shadow" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Reason</label>
+                    <input asp-for="Reason" class="form-control input-shadow" required />
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary py-2">
+                        <i class="fas fa-paper-plane"></i> Submit Request
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="@Url.Action("Index", "Rleave")" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+    </div>
+</div>
+
+<!-- تحسينات CSS -->
+<style>
+    .input-shadow {
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        background-color: #3a4fb1 !important;
+        border-color: #3a4fb1 !important;
+    }
+
+    .btn-outline-primary {
+        border-color: #3a4fb1 !important;
+        color: #3a4fb1 !important;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #3a4fb1 !important;
+            color: white !important;
+        }
+
+    .bg-primary {
+        background-color: #3a4fb1 !important;
+    }
+</style>

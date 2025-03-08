@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var punchedInEmployeeId = Context.Session.GetInt32("PunchInEmployeeId"); // استرجاع قيمة الـ Session
+}
+@{
+    Layout = "EmployeeDashboard";
+}
+
+@model SpaceSoftSolutions.Models.Employee
+
+<div class="container mt-4">
+    <div class="card shadow-lg rounded-4 border-0">
+       
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center" style="background-color: #3a4fb1; color: white; border-radius: 12px 12px 0 0;">
+            <h3 style="color: white !important; margin:auto; margin-bottom:5px; ">Employee Table</h3>
+        </div>
+
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-hover text-center align-items-center mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Full Name</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Email</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="align-middle">
+                            <td>
+                                <h6 class="mb-0 text-sm">@Model.Name</h6>
+                            </td>
+                            <td>
+                                <p class="text-xs text-secondary mb-0">@Model.Email</p>
+                            </td>
+                            <td class="align-middle">
+                                <div class="d-flex flex-wrap justify-content-center gap-2">
+                                    @if (punchedInEmployeeId == Model.Id)
+                                    {
+                                        <button class="btn btn-success btn-sm disabled">✔️ Punched In</button>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("PunchIn", "atendesncc", new { id = Model.Id })" class="btn btn-success btn-sm">
+                                            <i class="fas fa-sign-in-alt"></i> Punch In
+                                        </a>
+                                    }
+
+                                    <a href="@Url.Action("PunchOut", "atendesncc", new { id = Model.Id })" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-sign-out-alt"></i> Punch Out
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* تحسين تصميم الجدول */
+    .table-hover tbody tr:hover {
+        background-color: #f0f4ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* تحسين الأزرار */
+    .btn-sm {
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+
+    .btn-success {
+        background-color: #3a4fb1 !important;
+        border: none;
+    }
+
+    .btn-danger {
+        background-color: #e63946 !important;
+        border: none;
+    }
+
+    .btn-success:hover {
+        background-color: #2e3c82 !important;
+    }
+
+    .btn-danger:hover {
+        background-color: #c92c2c !important;
+    }
+
+    .card {
+        border-radius: 12px;
+    }
+
+    .bg-primary {
+        background-color: #2e3c82 !important;
+    }
+</style>

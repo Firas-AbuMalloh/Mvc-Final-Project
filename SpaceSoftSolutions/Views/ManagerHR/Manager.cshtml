@@ -1,0 +1,94 @@
+﻿@{
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+}
+<link rel="stylesheet" href="~/css/ManagerHR.css" asp-append-version="true" />
+
+@model IEnumerable<SpaceSoftSolutions.Models.Manager>
+
+<h1 class="fw-bold text-center my-4" style="color:#3a4fb1;">Managers</h1>
+
+<div class="d-flex justify-content-center mb-4">
+    <a asp-action="AddManager" asp-controller="ManagerHR" class="btn btn-primary btn-lg shadow" style="background-color: #3a4fb1; border-color: #3a4fb1;">
+        <i class="fas fa-user-plus"></i> Add New Manager
+    </a>
+</div>
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-hover text-center align-items-center">
+                    <thead style="background-color: #3a4fb1; color: white;">
+                        <tr>
+                            <thstyle ="color: white !important;">Name</thstyle>
+                            <th style="color: white !important;">Email</th>
+                            <th style="color: white !important;">Department</th>
+                            <th style="color: white !important;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #f8f9fa;">
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+                                <td>@m.Name</td>
+                                <td>@m.Email</td>
+                                <td>@(m.Department?.Name ?? "No Department")</td>
+                                <td>
+                                    <a asp-action="Edit" asp-controller="ManagerHR" asp-route-id="@m.Id" class="btn btn-primary btn-sm text-white shadow">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a asp-action="Delete" asp-controller="ManagerHR" asp-route-id="@m.Id" class="btn btn-danger btn-sm shadow">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* تحسين الجدول وجعله متناسقاً مع التصميم السابق */
+    .table th, .table td {
+        padding: 12px;
+        font-size: 14px;
+        vertical-align: middle;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #dbe3ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* تحسين ألوان الأزرار */
+    .btn-primary {
+        background-color: #3a4fb1 !important;
+        border-color: #3a4fb1 !important;
+    }
+
+    .btn-danger {
+        background-color: #e63946;
+        border-color: #e63946;
+    }
+
+    /* تحسين تأثيرات الأزرار */
+    .btn-primary:hover {
+        background-color: #2e3c82 !important;
+        border-color: #2e3c82 !important;
+    }
+
+    .btn-danger:hover {
+        background-color: #c92c2c !important;
+        border-color: #c92c2c !important;
+    }
+
+    /* تحسين تخطيط الأزرار */
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+</style>

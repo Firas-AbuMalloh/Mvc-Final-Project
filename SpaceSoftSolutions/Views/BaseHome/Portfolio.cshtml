@@ -1,0 +1,117 @@
+﻿@{
+    Layout = "HomeLayout";
+}
+
+
+
+<!-- Portfolio Section -->
+<main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+        <div class="container">
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="current">Products</li>
+                </ol>
+            </nav>
+            <h1>Products</h1>
+        </div>
+    </div><!-- End Page Title -->
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+        <div class="container">
+
+            <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+                <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+                    <li data-filter="*" class="filter-active">All</li>
+                    <li data-filter=".filter-web">Web Design</li>
+                    <li data-filter=".filter-marketing">Digital Marketing</li>
+                    <li data-filter=".filter-branding">Branding</li>
+                </ul><!-- End Portfolio Filters -->
+
+                <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web">
+                        <div class="portfolio-content h-100">
+                            <img src="~/assets/img/WebDesign.jpg" class="img-fluid" alt="Web Design Project">
+                            <div class="portfolio-info">
+                                <h4>Website Redesign</h4>
+                                <p>We redesigned the homepage of a local business to increase engagement.</p>
+                                <a href="~/assets/img/WebDesign.jpg" title="Web Design Project" data-gallery="portfolio-gallery-web" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                <a href=" @Url.Action("PortfolioDetails", "BaseHome")" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-marketing">
+                        <div class="portfolio-content h-100">
+                            <img src="~/assets/img/Marketing.jpg" class="img-fluid" alt="SEO Campaign">
+                            <div class="portfolio-info">
+                                <h4>SEO Campaign</h4>
+                                <p>We helped a tech startup rank on the first page of Google search results.</p>
+                                <a href="~/assets/img/Marketing.jpg" title="SEO Campaign" data-gallery="portfolio-gallery-marketing" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                <a href="@Url.Action("PortfolioDetails","BaseHome")" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+                        <div class="portfolio-content h-100">
+                            <img src="~/assets/img/Card.jpg" class="img-fluid" alt="Brand Identity" style="height:286px">
+                            <div class="portfolio-info">
+                                <h4>Brand Identity</h4>
+                                <p>Created a fresh, new logo and brand guidelines for a corporate client.</p>
+                                <a href="~/assets/img/Card.jpg" title="Brand Identity" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                <a href="@Url.Action("PortfolioDetails","BaseHome")" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web">
+                        <div class="portfolio-content h-100">
+                            <img src="~/assets/img/Ecommerce.jpg" class="img-fluid" alt="E-commerce Website" sstyle="height:280px;">
+                            <div class="portfolio-info">
+                                <h4>E-commerce Website</h4>
+                                <p>Designed and developed a fully functional e-commerce platform.</p>
+                                <a href="~/assets/img/Ecommerce.jpg" title="E-commerce Website" data-gallery="portfolio-gallery-web" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                <a href="@Url.Action("PortfolioDetails","BaseHome")" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-marketing">
+                        <div class="portfolio-content h-100">
+                            <img src="~/assets/img/Ads.jpg" class="img-fluid" alt="Social Media Ads" height:280px;>
+                            <div class="portfolio-info">
+                                <h4>Social Media Ads</h4>
+                                <p>Created and optimized targeted ads for various social media platforms.</p>
+                                <a href="~/assets/img/Ads.jpg" title="Social Media Ads" data-gallery="portfolio-gallery-marketing" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                <a href="@Url.Action("PortfolioDetails","BaseHome")" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+                        <div class="portfolio-content h-100">
+                            <img src="~/assets/img/r.jpg" class="img-fluid" alt="Packaging Design" style=" height:280px; width:400px">
+                            <div class="portfolio-info">
+                                <h4>Packaging Design</h4>
+                                <p>Designed eye-catching packaging for a new product line.</p>
+                                <a href="~/assets/img/8683204.jpg" title="Packaging Design" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                <a href="@Url.Action("PortfolioDetails","BaseHome")" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+
+                </div><!-- End Portfolio Container -->
+            </div>
+        </div>
+
+    </section><!-- /Portfolio Section -->
+
+</main>
+</main>

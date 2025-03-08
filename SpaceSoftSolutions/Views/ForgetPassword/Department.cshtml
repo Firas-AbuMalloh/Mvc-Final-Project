@@ -1,0 +1,151 @@
+﻿@model IEnumerable<SpaceSoftSolutions.Models.Department>
+<div class="container mt-5">
+    <!-- العنوان الرئيسي مع خلفية تفاعلية -->
+    <div class="text-center mb-5">
+        <h2 class="display-4 text-gradient">Explore Our Departments</h2>
+        <p class="lead text-light">Discover the specialized teams that power our digital marketing success.</p>
+    </div>
+
+    <!-- أقسام الخدمة مع تأثيرات حركية ونصوص مبتكرة -->
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="department-card shadow-lg rounded-4 p-5 department-card-hover">
+                    <!-- عنوان القسم (اسم الديبارتمنت) -->
+                    <h4 class="department-title text-center text-gradient mb-3">@item.Name</h4>
+                    <!-- وصف القسم -->
+                    <p class="department-description text-center text-muted mb-4">@item.Description</p>
+                    <!-- زر للتفاصيل -->
+                    <div class="text-center mt-4">
+                        <a href="#" class="btn btn-gradient py-2 px-5">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- قسم الخدمات المبتكرة مع تصميم عصري -->
+    <div class="text-center mt-5">
+        <h3 class="text-gradient mb-4">Our Cutting-Edge Expertise</h3>
+        <p class="lead text-light mb-5">We specialize in helping businesses thrive online with tailor-made digital marketing strategies.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+            <div class="expertise-box shadow-lg p-5 rounded-4">
+                <h4 class="text-gradient mb-4">Search Engine Optimization (SEO)</h4>
+                <p class="text-muted">Boost your organic visibility and bring more traffic to your site with our advanced SEO techniques and strategies.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="expertise-box shadow-lg p-5 rounded-4">
+                <h4 class="text-gradient mb-4">Social Media Marketing</h4>
+                <p class="text-muted">Leverage the power of social media platforms to connect with your audience and build a strong community around your brand.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="expertise-box shadow-lg p-5 rounded-4">
+                <h4 class="text-gradient mb-4">Pay-Per-Click (PPC) Ads</h4>
+                <p class="text-muted">Maximize your ROI with highly targeted ads and PPC campaigns across Google, Facebook, and Instagram.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="cta-section text-center mt-5">
+        <h3 class="display-4 text-gradient1 mb-4">Ready to Grow Your Business?</h3>
+        <p class="lead text-light mb-5">Let us craft a customized strategy that will help you succeed online. Our experts are here to assist you every step of the way.</p>
+        <a href="#" class="btn btn-primary btn-gradient py-3 px-5">Get Started Now</a>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        /* التدرج اللوني للنص */
+        .text-gradient {
+            background: linear-gradient(45deg, #7A73D1, #3a4fb1);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .text-gradient1 {
+            color: white;
+        }
+        /* النصوص الأكثر وضوحاً */
+        .text-light {
+            color: #f5f5f5 !important; /* النصوص الفاتحة لزيادة الوضوح */
+        }
+
+        /* تصميم أقسام الديبارتمنت */
+        .department-card {
+            background-color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            border-radius: 16px;
+            text-align: center;
+            padding: 2rem;
+            background: #f7f7f7;
+            border-left: 5px solid #7A73D1; /* إضافة حد جانبي مميز */
+        }
+
+        .department-card-hover:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-left: 5px solid #3a4fb1; /* تغيير الحد الجانبي عند التمرير */
+        }
+
+        .department-title {
+            font-size: 1.75rem; /* جعل حجم الخط أكبر */
+            font-weight: 600;
+            color: #333;
+        }
+
+        .department-description {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        /* الأزرار المتدرجة */
+        .btn-gradient {
+            background: linear-gradient(45deg, #7A73D1, #3a4fb1);
+            color: white;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+            .btn-gradient:hover {
+                transform: scale(1.05);
+                background: linear-gradient(45deg, #3a4fb1, #7A73D1);
+            }
+
+        /* أقسام الخبرات */
+        .expertise-box {
+            background: #f7f7f7;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+            .expertise-box:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+            }
+
+        /* تصميم قسم الـ CTA */
+        .cta-section {
+            background: #3a4fb1;
+            padding: 3rem 0;
+            color: white;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+}

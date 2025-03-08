@@ -1,0 +1,169 @@
+﻿@model List<SpaceSoftSolutions.Models.LeaveRequest>
+
+@{
+    Layout = "DashboardManagers";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container-fluid py-4">
+    <div class="card mb-4 shadow-lg">
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center" style="background-color: #3a4fb1; color: white; border-radius: 12px 12px 0 0;">
+            <h3 style="color: white !important; margin:auto; margin-bottom:5px; ">Leave Requests Table</h3>
+
+        </div>
+        <div class="card-body px-3 pt-0 pb-2">
+            <div class="table-responsive" style="overflow-x: auto;">
+                <table class="table table-hover text-center align-items-center mb-0" id="leaveRequestsTable">
+                    <thead class="text-white" style="background-color: #3a4fb1 !important; font-size: 20px !important;">
+                        <tr>
+                            <th style="color: white !important;">Employee Name</th>
+                            <th style="color: white !important;">Start Date</th>
+                            <th style="color: white !important;">End Date</th>
+                            <th style="color: white !important;">Reason</th>
+                            <th style="color: white !important;">Status</th>
+                            <th style="color: white !important;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #f8f9fa; font-size: 11px;">
+                        @foreach (var request in Model)
+                        {
+                            <tr class="hover-effect">
+                                <td style="font-size: 18px;">@request.Employee.Name</td>
+                                <td style="font-size: 18px;">@(request.StartDate != null ? request.StartDate.ToString("yyyy-MM-dd") : "N/A")</td>
+                                <td style="font-size: 18px;">@(request.EndDate != null ? request.EndDate.ToString("yyyy-MM-dd") : "N/A")</td>
+                                <td style="font-size: 18px;">@request.Reason</td>
+
+                                <td>
+                                    <span class="badge @(request.Status == "Approved" ? "bg-success" : request.Status == "Rejected" ? "bg-danger" : "bg-warning")">
+                                        @request.Status
+                                    </span>
+                                </td>
+                                <td>
+                                    @if (request.Status == "Rejected" || request.Status == "Pending")
+                                    {
+                                    <button id="approveButton_@request.Id" class="btn btn-custom-primary btn-sm" onclick="approveDecision(@request.Id)">
+                                        <i class="fas fa-check"></i> Approve
+                                    </button>
+                                    <button id="rejectButton_@request.Id" class="btn btn-custom-danger btn-sm" onclick="rejectDecision(@request.Id)">
+                                        <i class="fas fa-times"></i> Reject
+                                    </button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function approveDecision(leaveRequestId) {
+        document.getElementById('approveButton_' + leaveRequestId).disabled = true;
+        document.getElementById('rejectButton_' + leaveRequestId).disabled = false;
+
+        Swal.fire({
+            title: 'Success!',
+            text: 'The decision has been approved successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+
+        $.ajax({
+            url: '/Managers/UpdateStatus',
+            type: 'POST',
+            data: {
+                leaveRequestId: leaveRequestId,
+                decision: 'approve'
+            },
+            success: function(response) {
+                if (response.success) {
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3000);
+                }
+            }
+        });
+    }
+
+    function rejectDecision(leaveRequestId) {
+        document.getElementById('rejectButton_' + leaveRequestId).disabled = true;
+        document.getElementById('approveButton_' + leaveRequestId).disabled = false;
+
+        Swal.fire({
+            title: 'Rejected!',
+            text: 'The decision has been rejected successfully!',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+
+        $.ajax({
+            url: '/Managers/UpdateStatus',
+            type: 'POST',
+            data: {
+                leaveRequestId: leaveRequestId,
+                decision: 'reject'
+            },
+            success: function(response) {
+                if (response.success) {
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3000);
+                }
+            }
+        });
+    }
+</script>
+
+<style>
+    /* ✅ تحسين تصميم الجدول ليكون أكثر وضوحًا */
+    .table td, .table th {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        max-width: 200px;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #dbe3ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* تحسين الأزرار */
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+
+    /* 🎨 تخصيص ألوان الأزرار */
+    .btn-custom-primary {
+        background-color: #3a4fb1 !important;
+        color: white !important;
+        border: none;
+        border-radius: 8px;
+    }
+
+        .btn-custom-primary:hover {
+            background-color: #2c3d91 !important;
+        }
+
+    .btn-custom-danger {
+        background-color: #d9534f !important;
+        color: white !important;
+        border: none;
+        border-radius: 8px;
+    }
+
+        .btn-custom-danger:hover {
+            background-color: #c9302c !important;
+        }
+</style>

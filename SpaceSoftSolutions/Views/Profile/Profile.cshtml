@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+
+    if (Context.Session.GetString("UserType") == "HR"){
+        Layout = "DashboardLayout";
+    }
+    else if (Context.Session.GetString("UserType") == "Manager")
+    {
+        Layout = "DashboardManagers";
+    }
+    else {
+        Layout = "EmployeeDashboard";
+
+    }
+}
+
+@model dynamic
+
+<div style="max-width: 800px; margin: 50px auto; padding: 20px; background: #f3f3f3; border-radius: 20px; box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1); font-family: 'Arial', sans-serif; position: relative;">
+    <!-- Profile Header -->
+    <div style="display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #6a11cb, #2575fc); padding: 40px; border-radius: 50%; width: 160px; height: 160px; margin: 0 auto; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);">
+        <img src="@(!string.IsNullOrEmpty(Model.ImagePath) ? Model.ImagePath : "/images/default-avatar.png")"
+             alt="Profile Image" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+    </div>
+
+    <!-- Profile Body -->
+    <div style="text-align: center; padding-top: 80px;">
+        <h2 style="font-size: 28px; color: #333; font-weight: bold;">@Model.Name</h2>
+        <p style="font-size: 16px; color: #777;">@Model.Email</p>
+
+        <!-- Role Badge with Dynamic Colors -->
+        <div style="margin-top: 20px;">
+            @if (Model.GetType().Name == "HR")
+            {
+                <span style="background-color: #00bcd4; padding: 8px 15px; border-radius: 25px; color: white; font-weight: bold; font-size: 16px;">HR</span>
+            }
+            else if (Model.GetType().Name == "Manager")
+            {
+                <span style="background-color: #27ae60; padding: 8px 15px; border-radius: 25px; color: white; font-weight: bold; font-size: 16px;">Manager</span>
+                <p style="font-size: 16px; color: #555; margin-top: 10px;"><strong>Department:</strong> @(Model.Department?.Name ?? "Not Assigned")</p>
+            }
+            else if (Model.GetType().Name == "Employee")
+            {
+                <span style="background-color: #f39c12; padding: 8px 15px; border-radius: 25px; color: white; font-weight: bold; font-size: 16px;">Employee</span>
+                <p style="font-size: 16px; color: #555; margin-top: 10px;"><strong>Department:</strong> @(Model.Department?.Name ?? "Not Assigned")</p>
+                <p style="font-size: 16px; color: #555;"><strong>Manager:</strong> @(Model.Manager?.Name ?? "No Manager")</p>
+            }
+
+            <p style="font-size: 16px; color: #555; margin-top: 20px;"><strong>Address:</strong> @(Model.Address ?? "Not Provided")</p>
+        </div>
+
+        <!-- Edit Profile Button -->
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="@Url.Action("EditProfile", "Profile")" style="font-size: 18px; background-color: #2575fc; color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: all 0.3s ease;">
+                <i class="fas fa-edit"></i> Edit Profile
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    a:hover {
+        background-color: #6a11cb;
+        transform: scale(1.05);
+    }
+
+    .main-content {
+        margin-left: 260px;
+        padding: 39px;
+    }
+</style>

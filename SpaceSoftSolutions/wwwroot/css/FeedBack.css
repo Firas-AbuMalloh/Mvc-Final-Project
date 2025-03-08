@@ -1,0 +1,71 @@
+﻿body {
+    background-color: #f4f4f9; /* خلفية فاتحة للصفحة */
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    background-color: #ffffff; /* خلفية بيضاء للـ container */
+    padding: 20px;
+    border-radius: 10px; /* زاوية مستديرة للـ container */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* تأثير الظل حول الـ container */
+}
+
+h1 {
+    color: #3a4fb1"; /* لون النص */
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.card {
+    border: 1px solid #ddd; /* حدود رقيقة حول البطاقة */
+    border-radius: 10px; /* زاوية مستديرة للبطاقات */
+    transition: transform 0.3s ease-in-out; /* تأثير عند التفاعل مع البطاقة */
+}
+
+    .card:hover {
+        transform: translateY(-10px); /* تأثير رفع البطاقة عند مرور الماوس */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* زيادة الظل عند التفاعل */
+    }
+
+.card-header {
+    background-color: #6c5ce7; /* لون خلفية العنوان */
+    color: white; /* لون النص */
+    font-weight: bold;
+    border-top-left-radius: 10px; /* زاوية مستديرة في أعلى اليسار */
+    border-top-right-radius: 10px; /* زاوية مستديرة في أعلى اليمين */
+}
+
+.card-body p {
+    color: #555; /* لون النص داخل البطاقة */
+    font-size: 14px;
+}
+
+.card-body strong {
+    color: #3a4fb; /* لون النص الثقيل */
+}
+
+.row {
+    margin-bottom: 20px; /* مسافة بين الصفوف */
+}
+
+.card-footer {
+    text-align: center;
+    font-size: 14px;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #6c5ce7;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+    .download-btn:hover {
+        background: #5a4cc7;
+    }

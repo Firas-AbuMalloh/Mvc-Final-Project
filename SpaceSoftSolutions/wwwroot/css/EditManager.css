@@ -1,0 +1,72 @@
+﻿body {
+    background-color: #f4f5fc;
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    color: #3a4fb1;
+    font-weight: bold;
+}
+
+h4 {
+    color: #7A73D1;
+    font-weight: 600;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    padding: 20px;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+.form-group label {
+    font-weight: 600;
+    color: #3a4fb1;
+}
+
+.form-control {
+    border: 2px solid #3a4fb1;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .form-control:focus {
+        border-color: #7A73D1;
+        box-shadow: 0px 0px 8px rgba(58, 79, 177, 0.5);
+    }
+
+.btn-primary {
+    background-color: #3a4fb1;
+    border-color: #3a4fb1;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    padding: 10px;
+}
+
+    .btn-primary:hover {
+        background-color: #2c3e91;
+    }
+
+.btn-secondary {
+    background-color: #7A73D1;
+    border-color: #7A73D1;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    padding: 10px;
+}
+
+    .btn-secondary:hover {
+        background-color: #6057b1;
+    }
+
+.text-danger {
+    font-weight: bold;
+}

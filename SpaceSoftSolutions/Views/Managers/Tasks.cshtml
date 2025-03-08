@@ -1,0 +1,160 @@
+﻿@model List<SpaceSoftSolutions.Models.Task>
+
+@{
+    Layout = "DashboardManagers";
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@{
+    var successMessage = TempData["SuccessMessage"] as string;
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '@successMessage',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+        TempData["SuccessMessage"] = "";
+    }
+}
+
+<!-- Add Task Button -->
+<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+    <i class="fas fa-plus"></i> Add Task
+</button>
+
+<!-- Add Task Modal -->
+<div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #007bff; color: white;">
+                <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Managers/AddTask">
+                    <div class="mb-3">
+                        <label for="taskName" class="form-label">Task Name</label>
+                        <input type="text" class="form-control" id="taskName" name="TaskName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="taskDescription" class="form-label">Task Description</label>
+                        <textarea class="form-control" id="taskDescription" name="Description" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" name="StartDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">Due Date</label>
+                        <input type="date" class="form-control" id="endDate" name="EndDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="taskStatus" class="form-label">Status</label>
+                        <select class="form-select" id="taskStatus" name="Status" required>
+                            <option value="To Do">To Do</option>
+                            <option value="Doing">Doing</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="employee" class="form-label">Assign To</label>
+                        <select class="form-select" id="employee" name="EmployeeId" required>
+                            <option value="">Select Employee</option>
+                            @foreach (var employee in ViewBag.Employees as List<Employee>)
+                            {
+                                <option value="@employee.Id">@employee.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tasks Table -->
+<div class="card mb-4">
+    <div class="card-header pb-0 d-flex justify-content-between align-items-center" style="background-color: #3a4fb1; color: white; border-radius: 12px 12px 0 0;">
+        <h3 style="color: white !important; margin:auto; margin-bottom:5px; ">Tasks Table</h3>
+
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
+            <table class="table align-items-center table-hover w-100">
+                <thead class="text-white" style="background-color: #3a4fb1 !important; font-size: 20px !important;">
+                    <tr>
+                        <th style="color: white !important;">Task Name</th>
+                        <th style="color: white !important;">Start Date</th>
+                        <th style="color: white !important;">Due Date</th>
+                        <th style="color: white !important;">Status</th>
+                        <th style="color: white !important;">Assigned To</th>
+                        <th style="color: white !important;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: white;">
+                    @foreach (var task in Model)
+                    {
+                        <tr class="hover-effect">
+                            <td class="p-3">
+                                <h6 class="mb-0 text-sm">@task.TaskName</h6>
+                                <p class="text-xs text-secondary mb-0">@task.Description</p>
+                            </td>
+                            <td class="p-3"><p class="text-xs text-dark mb-0">@task.StartDate.ToString("yyyy-MM-dd")</p></td>
+                            <td class="p-3"><p class="text-xs text-dark mb-0">@task.EndDate.ToString("yyyy-MM-dd")</p></td>
+                            <td class="p-3"><p class="text-xs font-weight-bold text-dark mb-0">@task.Status</p></td>
+                            <td class="p-3"><p class="text-xs text-dark mb-0">@(task.Employee != null ? task.Employee.Name : "Unassigned")</p></td>
+                            <td class="align-middle text-center">
+                                <a href="@Url.Action("EditTask", "Managers", new { id = task.Id })" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                <a href="@Url.Action("DeleteTask", "Managers", new { id = task.Id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-effect:hover {
+        background-color: #e9f5ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        background-color: #0056b3;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .btn-primary:hover {
+            background-color: #004494;
+        }
+
+    .btn-danger {
+        border-radius: 8px;
+    }
+
+    .card-header h6 {
+        margin: 0;
+    }
+</style>

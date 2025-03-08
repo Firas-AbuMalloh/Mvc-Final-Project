@@ -1,0 +1,148 @@
+﻿@{
+    Layout = "HomeLayout";
+}
+@model List<SpaceSoftSolutions.Models.Department>
+
+<!-- Page Title -->
+<div class="page-title" data-aos="fade">
+    <div class="container">
+        <nav class="breadcrumbs">
+            <ol>
+                <li><a href="index.html">Home</a></li>
+                <li class="current">Departments</li>
+            </ol>
+        </nav>
+        <h1>Departments</h1>
+    </div>
+</div><!-- End Page Title -->
+<section id="services" class="services section">
+    <div class="container">
+        <div class="row gy-4">
+            @foreach (var department in Model)
+            {
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-archive"></i>
+                        </div>
+                        <a href="#" class="stretched-link">
+                            <h3>@department.Name</h3>
+                        </a>
+                        <p>@department.Description</p>
+                    </div>
+                </div>
+
+                <!-- End Service Item -->
+            }
+        </div>
+    </div>
+</section><!-- /Services Section -->
+<!-- Clients Section -->
+<section id="clients" class="section clients">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Our Clients</h2>
+        <p>We work with a diverse range of clients, helping them unlock their digital potential and achieve their business goals.</p>
+    </div><!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+                {
+                    "loop": true,
+                    "speed": 600,
+                    "autoplay": {
+                        "delay": 5000
+                    },
+                    "slidesPerView": "auto",
+                    "pagination": {
+                        "el": ".swiper-pagination",
+                        "type": "bullets",
+                        "clickable": true
+                    },
+                    "breakpoints": {
+                        "320": {
+                            "slidesPerView": 2,
+                            "spaceBetween": 40
+                        },
+                        "480": {
+                            "slidesPerView": 3,
+                            "spaceBetween": 60
+                        },
+                        "640": {
+                            "slidesPerView": 4,
+                            "spaceBetween": 80
+                        },
+                        "992": {
+                            "slidesPerView": 6,
+                            "spaceBetween": 120
+                        }
+                    }
+                }
+            </script>
+            <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide"><img src="~/assets/img/clients/client-1.png" class="img-fluid" alt="Client 1"></div>
+                <div class="swiper-slide"><img src="~/assets/img/clients/client-2.png" class="img-fluid" alt="Client 2"></div>
+                <div class="swiper-slide"><img src="~/assets/img/clients/client-3.png" class="img-fluid" alt="Client 3"></div>
+                <div class="swiper-slide"><img src="~/assets/img/clients/client-4.png" class="img-fluid" alt="Client 4"></div>
+                <div class="swiper-slide"><img src="~/assets/img/clients/client-5.png" class="img-fluid" alt="Client 5"></div>
+                <div class="swiper-slide"><img src="~/assets/img/clients/client-6.png" class="img-fluid" alt="Client 6"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+    </div>
+
+</section><!-- /Clients Section -->
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>What Our Clients Say</h2>
+        <p>See how we've helped businesses like yours grow and succeed in the digital world.</p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+        <div class="row gy-4">
+
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-item">
+                    <img src="~/assets/img/WebDesign.jpg" class="testimonial-img" alt="Client 1">
+                    <h3>Saul Goodman</h3>
+                    <h4>Ceo &amp; Founder</h4>
+                    <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Digital Boost has transformed our online presence, and their strategies have led to incredible business growth!</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                    </p>
+                </div>
+            </div><!-- End testimonial item -->
+
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-item">
+                    <img src="~/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="Client 2">
+                    <h3>Sara Wilsson</h3>
+                    <h4>Marketing Director</h4>
+                    <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Thanks to Digital Boost, our ad campaigns have reached new heights, delivering impressive ROI.</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                    </p>
+                </div>
+            </div><!-- End testimonial item -->
+
+        </div>
+
+    </div>
+
+</section><!-- /Testimonials Section -->

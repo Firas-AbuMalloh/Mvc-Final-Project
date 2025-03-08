@@ -1,0 +1,95 @@
+﻿@model List<SpaceSoftSolutions.Models.LeaveRequest>
+@{
+    Layout = "EmployeeDashboard";
+}
+
+<div class="container py-4">
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header text-center text-white" style="background-color: #3a4fb1; border-radius: 12px 12px 0 0;">
+            <h2 class="fw-bold mb-0">Vacation Requests</h2>
+        </div>
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-hover text-center align-items-center">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="text-dark">ID</th>
+                            <th class="text-dark">Employee ID</th>
+                            <th class="text-dark">Start Date</th>
+                            <th class="text-dark">End Date</th>
+                            <th class="text-dark">Reason</th>
+                            <th class="text-dark">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var req in Model)
+                        {
+                            <tr class="hover-effect">
+                                <td class="fw-bold">@req.Id</td>
+                                <td>@req.EmployeeId</td>
+                                <td class="text-success">@req.StartDate.ToString("yyyy-MM-dd")</td>
+                                <td class="text-danger">@req.EndDate.ToString("yyyy-MM-dd")</td>
+                                <td>@req.Reason</td>
+                                <td>
+                                    <span class="badge @(req.Status == "Approved" ? "bg-success" : req.Status == "Rejected" ? "bg-danger" : "bg-warning")">
+                                        @req.Status
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-center bg-light">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary shadow">
+                <i class="fas fa-arrow-left"></i> Home
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}
+
+<style>
+    /* تحسين مظهر الجدول */
+    .table th, .table td {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    /* تحسين ألوان الأزرار */
+    .btn-primary {
+        background-color: #3a4fb1 !important;
+        border-color: #3a4fb1 !important;
+        font-weight: bold;
+    }
+
+        .btn-primary:hover {
+            background-color: #2c3d91 !important;
+            border-color: #2c3d91 !important;
+        }
+
+    /* تحسين الكارد */
+    .card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    /* تحسين مظهر البادجات */
+    .badge {
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+
+    /* تحسين مظهر الصفوف عند التمرير */
+    .table-hover tbody tr:hover {
+        background-color: #f0f5ff !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+ 
+</style>
