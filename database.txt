@@ -1,0 +1,141 @@
+-- إنشاء قاعدة البيانات
+CREATE DATABASE SpaceSoftSolutions;
+USE SpaceSoftSolutions;
+
+-- إنشاء جدول الأقسام
+CREATE TABLE Departments (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(100) NOT NULL,
+    Description VARCHAR(255)
+);
+
+-- إنشاء جدول الموارد البشرية (HR)
+CREATE TABLE HR (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    PasswordHash VARCHAR(255) NOT NULL,
+    GoogleID VARCHAR(255) NULL
+);
+select *from HR
+-- إنشاء جدول المديرين
+CREATE TABLE Managers (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    PasswordHash VARCHAR(255) NOT NULL,
+    GoogleID VARCHAR(255) NULL,
+    DepartmentID INT FOREIGN KEY REFERENCES Departments(ID) ON DELETE SET NULL
+);
+
+-- إنشاء جدول الموظفين
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    PasswordHash VARCHAR(255) NOT NULL,
+    GoogleID VARCHAR(255) NULL,
+    ImagePath VARCHAR(255),
+    Address VARCHAR(255),
+    Position VARCHAR(100),
+    ManagerID INT FOREIGN KEY REFERENCES Managers(ID) ON DELETE SET NULL,
+    DepartmentID INT FOREIGN KEY REFERENCES Departments(ID) ON DELETE SET NULL
+);
+
+-- إنشاء جدول المهام مع إضافة وصف المهمة
+CREATE TABLE Tasks (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    TaskName VARCHAR(255) NOT NULL,
+    Description TEXT NULL, -- وصف تفصيلي للمهمة
+    StartDate DATE NOT NULL,
+    EndDate DATE NOT NULL,
+    Status VARCHAR(10) DEFAULT 'To Do' CHECK (Status IN ('To Do', 'Doing', 'Done')),
+    EmployeeID INT NOT NULL FOREIGN KEY REFERENCES Employees(ID) ON DELETE CASCADE
+);
+
+
+-- إنشاء جدول الحضور والانصراف
+CREATE TABLE Attendance (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    EmployeeID INT NOT NULL FOREIGN KEY REFERENCES Employees(ID) ON DELETE CASCADE,
+    PunchIn DATETIME NOT NULL,
+    PunchOut DATETIME
+);
+
+-- إنشاء جدول طلبات الإجازة
+CREATE TABLE LeaveRequests (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    EmployeeID INT NOT NULL FOREIGN KEY REFERENCES Employees(ID) ON DELETE CASCADE,
+    StartDate DATE NOT NULL,
+    EndDate DATE NOT NULL,
+    Reason VARCHAR(255),
+    Status VARCHAR(10) DEFAULT 'Pending' CHECK (Status IN ('Pending', 'Approved', 'Rejected'))
+);
+
+-- إنشاء جدول التقييمات
+CREATE TABLE Evaluations (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    EmployeeID INT NOT NULL FOREIGN KEY REFERENCES Employees(ID) ON DELETE CASCADE,
+    ManagerID INT NOT NULL FOREIGN KEY REFERENCES Managers(ID),
+    Score VARCHAR(15) CHECK (Score IN ('excellent', 'very good', 'good', 'fair')),
+    Comments VARCHAR(255),
+    DateEvaluated DATE DEFAULT GETDATE()
+);
+
+-- إنشاء جدول التغذية الراجعة (Feedback)
+CREATE TABLE Feedback (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Message VARCHAR(MAX) NOT NULL,
+    SubmittedAt DATETIME DEFAULT GETDATE()
+);
+
+-- إدخال بيانات مبدئية للأقسام
+INSERT INTO Departments (Name, Description) VALUES 
+('HR', 'Human Resources Department'),
+('IT', 'Information Technology Department'),
+('Finance', 'Finance and Accounting Department');
+
+-- إدخال بيانات مبدئية للموارد البشرية
+INSERT INTO HR (Name, Email, PasswordHash) VALUES 
+('ali', 'ali', '123');
+
+-- إدخال بيانات مبدئية للمديرين
+INSERT INTO Managers (Name, Email, PasswordHash, DepartmentID) VALUES 
+('Alice Johnson', 'alice.johnson@company.com', 'hashed_password_456', 1),
+('Bob Smith', 'bob.smith@company.com', 'hashed_password_789', 2);
+
+-- إدخال بيانات مبدئية للموظفين
+INSERT INTO Employees (Name, Email, PasswordHash, Position, ManagerID, DepartmentID) VALUES 
+('Charlie Brown', 'charlie.brown@company.com', 'hashed_password_111', 'Software Engineer', 1, 2),
+('David White', 'david.white@company.com', 'hashed_password_222', 'HR Specialist', 2, 1);
+
+-- إدخال بيانات مبدئية للمهام
+-- إدخال بيانات مبدئية للمهام مع الوصف الجديد
+INSERT INTO Tasks (TaskName, Description, StartDate, EndDate, Status, EmployeeID) VALUES 
+('Develop API Endpoint', 'Create and optimize RESTful API for user authentication', '2025-03-01', '2025-03-10', 'To Do', 1),
+('UI Design Review', 'Review and finalize the homepage UI/UX design', '2025-03-02', '2025-03-07', 'Doing', 2),
+('Database Optimization', 'Optimize database queries and indexing for performance improvement', '2025-03-05', '2025-03-15', 'To Do', 1),
+('Security Audit', 'Perform security audit on the web application to identify vulnerabilities', '2025-03-10', '2025-03-20', 'To Do', 2),
+('Testing & Bug Fixing', 'Perform thorough testing and fix reported bugs from QA team', '2025-03-15', '2025-03-25', 'Doing', 1);
+SELECT* FROM Employees
+-- إدخال بيانات مبدئية للحضور والانصراف
+INSERT INTO Attendance (EmployeeID, PunchIn, PunchOut) VALUES 
+(1, '2025-02-26 08:00:00', '2025-02-26 17:00:00'),
+(2, '2025-02-26 09:00:00', '2025-02-26 18:00:00');
+
+-- إدخال بيانات مبدئية لطلبات الإجازة
+INSERT INTO LeaveRequests (EmployeeID, StartDate, EndDate, Reason, Status) VALUES 
+(1, '2025-03-10', '2025-03-15', 'Vacation', 'Pending'),
+(2, '2025-03-20', '2025-03-25', 'Family Emergency', 'Approved');
+
+-- إدخال بيانات مبدئية للتقييمات
+INSERT INTO Evaluations (EmployeeID, ManagerID, Score, Comments) VALUES 
+(1, 1, 'excellent', 'Outstanding performance'),
+(2, 2, 'good', 'Needs improvement in teamwork');
+
+-- إدخال بيانات مبدئية للتغذية الراجعة
+INSERT INTO Feedback (Name, Email, Message) VALUES 
+('John Doe', 'john.doe@company.com', 'Great system!'),
+('Alice Johnson', 'alice.johnson@company.com', 'Need a feature to track promotions');
